@@ -1,4 +1,4 @@
 {
   "title": "Documentation",
-  "pages": ["index", "utility-billing", "controls"]
+  "pages": ["index", "utility-billing", "controls", "---", "release-notes"]
 }
