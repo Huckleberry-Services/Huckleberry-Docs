@@ -2,6 +2,25 @@
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 
+/* Huckleberry brand palette
+   brand-green: #90b14e
+   brand-green-dark: #7a9640
+   brand-navy: #162f5b
+   brand-navy-light: #1e3a6e
+*/
+
+:root {
+  --color-fd-primary: oklch(0.71 0.13 122);
+  --color-fd-primary-foreground: oklch(1 0 0);
+  --color-fd-ring: oklch(0.71 0.13 122);
+}
+
+.dark {
+  --color-fd-primary: oklch(0.76 0.14 122);
+  --color-fd-primary-foreground: oklch(0.18 0.02 260);
+  --color-fd-ring: oklch(0.76 0.14 122);
+}
+
 html {
   scrollbar-gutter: stable;
 }
