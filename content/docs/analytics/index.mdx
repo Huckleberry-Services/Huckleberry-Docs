@@ -1,0 +1,31 @@
+---
+title: Analytics & Measurement & Verification
+description: M&V, comparisons, and advanced analytics.
+---
+
+## Measurement & Verification (M&V)
+
+In active development. Focus is on IPMVP Option C compliance, automated Report Cards, and engineering-grade savings proof.
+
+Current / in-progress capabilities (many tagged [IN PROGRESS]):
+- Automated monthly Report Card generation and scheduled email delivery (internal + external recipients, with UUID unsubscribe tokens — HCKLBRR-336).
+- Monthly and cumulative savings vs. baseline.
+- Missing data detection and gap alerts.
+- ASHRAE 14 regression models (3P/4P/5P change-point, SLR, degree-day, mean) via dedicated MV-Regression-Lambda service.
+- Model quality metrics (R², CV-RMSE), weather data integration (ACIS/Open-Meteo).
+- Equipment performance trend analysis and history timeline with change logs.
+- Historical report archive.
+
+See also the dedicated Report Card automation Lambda and frontend M&V pages (option-c, etc.).
+
+## Comparisons
+
+See the [Dashboards](/docs/dashboards) page for ranking and period-over-period analysis.
+
+## Related Backend
+
+- Dual-write readings repository (Influx primary with MySQL fallback/quarantine).
+- Gap imputer and anomaly detection in the API.
+- Full OpenAPI contract (enforced in CI — always run `npm run openapi:generate` in HuckleberryAPI after route changes and commit the updated docs/openapi.json).
+
+For implementation details see the monorepo `AGENTS.md` and individual project plans.

@@ -3,12 +3,37 @@ title: Release Notes
 description: What's new in the Huckleberry platform.
 ---
 
-This is where we&rsquo;ll post updates about new features, improvements, and
-fixes to the Huckleberry platform.
+Significant updates, shipped features, and notable fixes. Grouped by period. Most recent at top.
 
-Each entry is dated and grouped by release period. The most recent updates
-appear in the sidebar to the left.
+Want to be notified? Email info@huckleberryservices.com.
 
-Want to be notified when new releases ship? Email
-[info@huckleberryservices.com](mailto:info@huckleberryservices.com) and
-we&rsquo;ll add you to the announcement list.
+## 2026 (Active Development)
+
+**Custom Dashboard ("My Dashboard") — HCKLBRR-672**
+Personalized homepage with site following, widget pallets (costs, recent invoices, equipment status), drag-and-drop, server-side persistence, and global filters. Widget Registry pattern for future extensibility. Admin multi-client support.
+
+**Buildings Data Model Foundation (HCKLBRR-935 series)**
+Per-building addresses, site foreign keys, CRUD endpoints. Enables finer-grained modeling for equipment, meters, and profiles. Multiple supporting worktrees for accounts, meters, JACEs, etc.
+
+**Advanced FDD / Fault Detection (HCKLBRR-941 and related)**
+Cause/effect narratives per rule, per-detector evidence persistence, historical backfill for open faults, alarm state lifecycle management, expanded JACE point alarm config (stale, ranges, etc.), batch decisions, and UI exposure. Major improvements to Niagara + Skyspark fault handling.
+
+**Demo Experience & Report Card Hardening**
+Numerous hotfixes around demo client selection, auto-apply filters for performance/utility views, report-card one-shot triggering, and isDemo signaling. Improves internal demos and client previews.
+
+**Equipment Reference Recovery & Tagging**
+Equip_ref recovery groups, purge tools for ambiguous references, expanded Haystack point mapping, and equipment tagging vocabulary documentation.
+
+**NHaystack / Direct Niagara Progress**
+Continued polling stability, point mapping UI improvements, and security-focused outbound MQTT patterns (no inbound ports required).
+
+**M&V & Report Cards (Ongoing)**
+Math engine work (ASHRAE regression in dedicated Lambda), scheduled delivery, unsubscribe flows, cumulative savings, and frontend M&V pages (option-c etc.). Still tagged in-progress in many places.
+
+**Node API Maturity**
+Ongoing controller migrations, dual-write readings (Influx + MySQL quarantine), OpenAPI contract enforcement in CI, and quality gates (lint + typecheck + tests + migration safety).
+
+Previous releases (earlier 2026 and 2025) included the full PHP-to-Node migration, initial Arcadia webhook processing, Environmental Footprint overhaul with anomaly detection and PDFs, Custom Dashboard precursor work, and broad CI / contract testing improvements.
+
+For the absolute latest, see active branches, worktrees (HCKLBRR-XXX), and the monorepo commit history.
+

@@ -1,25 +1,57 @@
 ---
-title: Controls
+title: Controls & Equipment
 description: Connecting building controls and equipment data into Huckleberry.
 ---
 
-The Controls module brings real-time and historical equipment data into the
-platform alongside utility bills, so cost, consumption, and operational
-performance can be analyzed together.
+The Controls module brings real-time and historical equipment data (Skyspark + Niagara) into the platform so it can be analyzed together with utility billing and environmental data.
 
-## What it covers
+## Connectivity & Data Sources
 
-- **Connectivity** &mdash; supported protocols (BACnet, Modbus, Niagara,
-  Skyspark, MQTT) and how data is mapped into the Huckleberry schema.
-- **Equipment monitoring** &mdash; live meter and equipment readings, with
-  fault detection and alerting.
-- **Performance tracking** &mdash; equipment-level KPIs, heat maps, and
-  maintenance signal generation.
-- **Integrations** &mdash; how the controls layer pairs with Utility Billing
-  for cause-and-effect analysis.
+- Skyspark sites and rules (Haystack tagging).
+- Niagara JACEs via nHaystack (NHaystackPoller for periodic reads into the API).
+- Direct JACE BMS proxy access for authenticated interactive sessions (popup model due to WebSocket requirements — HCKLBRR-413).
+- MQTT/IoT Core pipelines (verified outbound from JACEs).
+- Equipment resolved across sources with canonical meters and equip_ref recovery tooling.
 
-## Coming soon
+## Equipment Monitoring & Live Views
 
-This section is being filled in. If there&rsquo;s something specific you need
-covered next, reach out at
-[info@huckleberryservices.com](mailto:info@huckleberryservices.com).
+- Live readings and status (green "connected" indicators for data within ~30 min).
+- Facility list + category views.
+- Site detail pages (address, images, coordinates).
+- Equipment history timeline with change logs and specifications.
+
+## Fault Detection & Diagnostics (FDD)
+
+Advanced engine on top of Skyspark + custom rules + Niagara alarms (major work in HCKLBRR-941 and related):
+
+- Rule-based alerts with cause/effect narratives generated per fault.
+- Per-detector evidence persistence and exposure in the UI.
+- Historical backfill for detail on still-open faults.
+- Alarm state management: per-poll batch decisions, full lifecycle (active → acknowledged → resolved) with timestamps.
+- Configurable alarms on JACE points (boolean, enum, numeric high/low, range bands, stale detection).
+- Cascading admin UI for alarm setup (device → group → point) with custom messages.
+- Alarm events table (severity badges, status filtering, search).
+
+See also [Facility Management in Dashboards](/docs/dashboards) and [Profiles](/docs/profiles) for mapping.
+
+## Controls Access (BMS / JACE)
+
+Authenticated popup windows (not iframes) for full JACE interactivity:
+
+- SCRAM-SHA-256 + Basic + Form auth handled automatically.
+- Session/cookie management and proxying.
+- Subdomain mapping work in progress for nicer URLs (e.g. maclay.huckleberryservices.com).
+
+## Performance & Maintenance Signals
+
+Equipment-level KPIs, heat maps, cost-to-fix analysis on rules, and maintenance signal generation.
+
+## Recent / In-Progress Work
+
+- Buildings foundation (HCKLBRR-935 worktrees): per-building addresses, site FKs, CRUD for richer hierarchy.
+- Equipment tagging vocabulary and Haystack mapping improvements.
+- Equip ref recovery and ambiguous group cleanup.
+- Expanded JACE alarm configuration and evaluation engine.
+
+Backend components live primarily in `HuckleberryAPI/src/lib/helpers/`, `src/services/fdd/`, `src/lib/readingsRepo/`, and the NHaystackPoller project.
+

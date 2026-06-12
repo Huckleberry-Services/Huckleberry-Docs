@@ -1,0 +1,70 @@
+---
+title: Dashboards
+description: Core analytics experiences in the Huckleberry frontend.
+---
+
+Huckleberry's dashboards turn raw utility, equipment, and environmental data into actionable insights.
+
+## Performance Dashboard
+
+The primary hub for cost, usage, savings, and performance across all facilities.
+
+Key capabilities:
+- Monthly cost/usage trends with multi-utility breakdown (Electric, Gas, Water, Steam).
+- Peak demand tracking.
+- Cumulative energy savings visualization.
+- Performance score calculation and tracking.
+- Geographic heat maps and location ranking/comparison.
+- Customizable, user-persistent chart layouts and saved filters.
+- Prior-period comparisons with normalized "apples-to-apples" logic.
+
+## Custom / "My" Dashboard
+
+Personalized landing page. Users follow specific sites and see aggregated views without leaving the homepage.
+
+- Global site filter (all followed sites or single-site drill-down).
+- Widget Registry: extensible pallets for Utility Costs (stacked bars), Recent Invoices, Equipment Status (with 30-min freshness indicator).
+- Drag-and-drop reordering with @dnd-kit, configurable sizing (half/full width, row height).
+- Server-side persistence (config, followed sites, pallets stored in DB).
+- Equipment detail modals with live Niagara readings.
+- Promo banner on the main Performance Dashboard for discoverability.
+- Admin support for managing per-client dashboards.
+
+## Facility Management (Live View)
+
+Real-time building monitoring combining Skyspark and Niagara JACE data.
+
+- Live equipment status and sensor readings.
+- Fault detection (Skyspark sparks + custom FDD rules) and Niagara alarms.
+- Advanced FDD features (HCKLBRR-941): cause/effect narratives per rule, per-detector evidence, historical backfill for open faults, alarm lifecycle (active/ack/resolved) with batch state decisions.
+- Alarm events table with severity, status, breach direction, filtering, and search.
+- Dual-source support (Skyspark sites + Niagara buildings/JACEs).
+- Site detail pages with images, coordinates, address.
+- BMS/JACE proxy access for authenticated controls popups (see Controls section).
+
+## Environmental Footprint
+
+Carbon emissions and water usage analytics with sustainability tracking.
+
+- Annual + trailing-12-month trends (dual-axis tons + tons/sqft).
+- KPIs with prior-period arrows.
+- Goal tracking (base year vs current with performance line).
+- Month-aligned normalization for fair comparisons.
+- UOM-aware conversions (CCF, CF, gallons, etc.) with automatic base-year detection.
+- IQR-based invoice anomaly detection (with sensitivity control) — auto-excludes from aggregates.
+- Missing-data banners for sites excluded from comparisons.
+- Top performers (efficiency and reduction) with medal badges.
+- Branded PDF exports for carbon and water (charts + KPIs + tables).
+- Boosters & detractors reference tables.
+
+## Comparisons
+
+Portfolio-level ranking and side-by-side analysis.
+
+- Rank sites by cost, usage, carbon, etc.
+- Custom groupings (by group, state, or none).
+- Configurable date ranges (performance vs comparison periods).
+- Stacked bar visualizations.
+- Note: Legacy Virtual Audit Comparison deprecated in favor of Site Profiles (HCKLBRR-433).
+
+See also: [Profiles](/docs/profiles) for site/equipment master data and [Analytics](/docs/analytics) for M&V.

@@ -1,4 +1,16 @@
 {
   "title": "Documentation",
-  "pages": ["index", "utility-billing", "controls", "integrations", "---", "release-notes"]
+  "pages": [
+    "index",
+    "---",
+    "utility-billing",
+    "dashboards",
+    "controls",
+    "analytics",
+    "profiles",
+    "integrations",
+    "---",
+    "admin",
+    "release-notes"
+  ]
 }

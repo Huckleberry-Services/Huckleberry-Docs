@@ -1,0 +1,57 @@
+---
+title: Admin & Configuration
+description: Multi-tenant management, feature control, and data mapping tools.
+---
+
+The admin dashboard (separate Next.js app, typically on port 3001) and in-app admin sections provide tools for client success, operations, and data modeling teams.
+
+## Client & Organization Management
+
+- Create and configure clients with white-label branding (logo, colors, modals).
+- Manage Skyspark and BMS (JACE) credentials per client.
+- Key-value metadata for custom config and feature flags.
+- Per-client storage tracking and cost attribution.
+- Account limits, 2FA toggles, geographic defaults (Google Maps).
+
+## Application & Feature Gating
+
+Powerful sidebar menu builder — control exactly which modules each client sees without code deploys.
+
+- Hierarchical menu nesting (parent/child "apps").
+- Per-client assignment via simple checkbox UI.
+- Icon, order, and grouping configuration.
+- Supports A/B testing and tiered access.
+
+## Skyspark Mapping
+
+Semantic data model builder for raw Skyspark points.
+
+- Live connector tree with point discovery.
+- Site and equipment hierarchy management.
+- Multi-select point assignment with commit workflow.
+- Point count tracking (for licensing).
+- Encrypted credential storage.
+
+## Controls Point Mapping (JACE / Niagara)
+
+Real-time sensor mapping from nHaystack/JACE into logical equipment hierarchy.
+
+- Live equipment groups and point counts.
+- Support for all point types (Numeric, Boolean, Enum, String).
+- Inline equipment creation during mapping.
+- JACE device management (create, verify, configure).
+- AWS Secrets Manager for credentials.
+- Direct unit writing to JACE slot paths.
+- Pagination/filtering.
+- Per-point alarm configuration: thresholds, ranges, stale detection, custom messages (recent HCKLBRR-493/497 work).
+- Cascading dropdowns for setup.
+- Alarm evaluation engine runs on each readings poll (fire-and-forget, low latency).
+
+## User Management & Access
+
+- Full user directory with sortable columns and last-signed-in tracking.
+- Role-based access (Client Admin required for certain org settings).
+- JWT + refresh token handling, SSO via WorkOS.
+- Session timeout warnings and admin enforcement.
+
+See also the main monorepo `HuckleberryAPI` and `admin-dashboard` projects for implementation.

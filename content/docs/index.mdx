@@ -3,27 +3,41 @@ title: Introduction
 description: Welcome to the Huckleberry documentation.
 ---
 
-Huckleberry is a facility, energy, and environmental management platform that
-helps organizations measure, manage, and optimize their building and utility
-performance from a single data-agnostic system.
+Huckleberry is an energy management and utility billing analytics platform by FSM Energy. It provides a unified view of utility consumption, costs, equipment performance, and building controls across facilities — ingesting data from Arcadia, Niagara, Skyspark, manual entry, and more.
 
-These docs cover how the platform works, how data flows through it, and how to
-get the most out of each module. They&rsquo;re a living reference &mdash; check
-back as new sections are added.
+The customer-facing frontend (Next.js 16 + React 19) and Node.js API (Express + Prisma) deliver dashboards, analytics, M&V, fault detection, and automated reporting.
 
-## What you&rsquo;ll find here
+These docs are a living reference for operators, analysts, and admins. Content is kept in sync with active development across multiple worktrees and the `development` branch.
 
-- **Concepts** &mdash; the building blocks of the platform: sites, meters,
-  performance and comparison periods, normalization, and reporting.
-- **Modules** &mdash; how to use utility billing, controls, environmental
-  tracking, and reporting features.
-- **Integrations** &mdash; how Huckleberry ingests utility data, building
-  controls, and third-party APIs.
-- **FAQ** &mdash; answers to common questions from operators, finance teams,
-  and sustainability leads.
+## Platform Overview
+
+**Core Modules (Frontend):**
+- Performance Dashboard — cost, usage, savings, performance scores, heat maps, rankings.
+- Facility Management — live equipment via Skyspark/Niagara, fault detection (FDD), alarms.
+- Environmental Footprint — carbon & water analytics, goals, anomaly detection, branded PDFs.
+- Custom / My Dashboard — follow sites, widget pallets (costs, invoices, equipment status), drag-and-drop, persistence.
+- Facility Controls — authenticated popup access to JACE BMS (HCKLBRR-413).
+- Utility Data / Billing — searchable invoices, Arcadia automated ingestion, manual entry, exports.
+- Measurement & Verification (M&V) — in active development (ASHRAE 14 regression, Report Cards, scheduled delivery).
+- Comparisons, Profiles (sites/equipment/rules), Notifications.
+
+**Admin & Ops:**
+- Client management, white-label, feature gating (sidebar apps per client).
+- Skyspark point mapping and Niagara/JACE point mapping with alarms.
+- User management, SSO (WorkOS), JWT sessions.
+
+**Backend & Integrations:**
+- HuckleberryAPI (Node 20, Prisma/MySQL, DynamoDB, Influx dual-write for readings).
+- Arcadia-Plug-Listener (webhooks + SQS for utility statements).
+- NHaystackPoller, ReportCard-Automation-Lambda (Puppeteer PDFs), UrjanetImports.
+- OpenAPI contract enforced via tests (run `npm run openapi:generate` after route changes).
+
+Recent focus areas (active worktrees/branches): Buildings data model foundation, advanced FDD/fault narratives & evidence (HCKLBRR-941), equipment reference recovery, demo experience hardening, M&V math + scheduling.
+
+## Getting Started (Developers)
+
+See individual project READMEs and AGENTS.md / CLAUDE.md at the monorepo root for setup, Docker (local-mysql), testing (node:test for API, Playwright smoke for frontend), and strict git/PR flow.
 
 ## Getting in touch
 
-Need something not covered here? Reach out at
-[info@huckleberryservices.com](mailto:info@huckleberryservices.com) or visit
-[huckleberryservices.com](https://huckleberryservices.com).
+Questions or gaps? [info@huckleberryservices.com](mailto:info@huckleberryservices.com) or the internal Slack/Teams channels.

@@ -1,25 +1,54 @@
 ---
-title: Utility Billing
+title: Utility Billing & Data
 description: How Huckleberry ingests, normalizes, and analyzes utility bills.
 ---
 
-The Utility Billing module turns monthly utility statements into structured,
-analyzable data. Bills are ingested from a mix of provider APIs, broker feeds,
-and manual uploads, then normalized into a common schema so cost and
-consumption can be compared across sites, meters, and time periods.
+The Utility Billing module turns monthly utility statements into structured, analyzable data. Invoices are the primary source for cost, consumption, and savings calculations across the platform.
 
-## What it covers
+## Ingestion
 
-- **Bill ingestion** &mdash; how statements get into the platform (Arcadia,
-  Urjanet, direct provider integrations, manual entry).
-- **Validation** &mdash; catching missing reads, anomalies, and provider
-  errors before they pollute analytics.
-- **Cost analytics** &mdash; baseline comparisons, weather normalization, and
-  IPMVP-compliant measurement and verification.
-- **Reporting** &mdash; recurring reports for finance teams and stakeholders.
+- **Arcadia (Plug)**: Primary automated path via webhooks. Arcadia-Plug-Listener receives STATUS_CHANGE / EXISTING_DATA_UPDATED / NEW_DATA_AVAILABLE events, queues via SQS, and processes into statements, accounts, meters, and charges. Full statement versioning and custom data support.
+- **Urjanet**: CSV-based import utility (UrjanetImports project).
+- **Manual entry**: Multiple input methods with validation.
+- **Broker / direct provider feeds** and legacy rollups.
 
-## Coming soon
+The invoice writer pipeline (adapters for Arcadia, Urjanet, manual, legacy) handles classification, FK resolution (sites, meters, service types), location backfill, and reconciliation.
 
-This section is being filled in. If there&rsquo;s something specific you need
-covered next, reach out at
-[info@huckleberryservices.com](mailto:info@huckleberryservices.com).
+## Data Model & Normalization
+
+- Statements → accounts → meters → charges / intervals.
+- Service type normalization and defaults.
+- UOM handling and conversions.
+- Performance Period vs. Comparison Period concepts (month-aligned or custom).
+- Weather normalization and gap imputation for clean analytics.
+
+## Validation & Quality
+
+- Anomaly detection (IQR-based with user-adjustable sensitivity; auto-excludes bad invoices from aggregates).
+- Missing data / gap tracking with banners in UI.
+- Provider error surfacing and manual correction flows.
+- Canonical meter resolution across data sources.
+
+## Analytics & M&V Usage
+
+Utility data powers:
+- Performance Dashboard trends, rankings, and heat maps.
+- Environmental Footprint (carbon/water derived from usage where applicable).
+- Cost analytics, baseline comparisons.
+- IPMVP / ASHRAE 14 M&V (in active development — see [Analytics](/docs/analytics)).
+
+## Exports & Reporting
+
+- Excel and PDF exports from tables.
+- Structured branded PDFs for sustainability (carbon + water).
+- Automated Report Cards (in progress — scheduled delivery of M&V summaries).
+
+## Admin / Ops Tools
+
+- Credential management (Arcadia Connect flows, MFA support).
+- Account/meter assignment and batch operations.
+- Webhook resend and statement discovery tools.
+- Storage and cost attribution per client.
+
+See the `HuckleberryAPI/src/lib/invoiceWriter/` and Arcadia listener for implementation details. OpenAPI endpoints under `/invoices`, `/utility/*`, and plug utility routes.
+
