@@ -7,33 +7,32 @@ Significant updates, shipped features, and notable fixes. Grouped by period. Mos
 
 Want to be notified? Email info@huckleberryservices.com.
 
-## 2026 (Active Development)
+## July 2026 Release
 
-**Custom Dashboard ("My Dashboard") — HCKLBRR-672**
-Personalized homepage with site following, widget pallets (costs, recent invoices, equipment status), drag-and-drop, server-side persistence, and global filters. Widget Registry pattern for future extensibility. Admin multi-client support.
+We're excited to share meaningful improvements that help you monitor facilities more effectively, understand performance at a glance, and receive regular, useful insights without extra effort.
 
-**Buildings Data Model Foundation (HCKLBRR-935 series)**
-Per-building addresses, site foreign keys, CRUD endpoints. Enables finer-grained modeling for equipment, meters, and profiles. Multiple supporting worktrees for accounts, meters, JACEs, etc.
+**Personalized Dashboards**  
+Follow the sites that matter most to you and see a tailored homepage with quick summaries of utility costs, recent invoices, and equipment status. Rearrange and resize the information cards to match how you work, with your preferences saved automatically. Filter views across your selected sites for faster decision-making.
 
-**Advanced FDD / Fault Detection (HCKLBRR-941 and related)**
-Cause/effect narratives per rule, per-detector evidence persistence, historical backfill for open faults, alarm state lifecycle management, expanded JACE point alarm config (stale, ranges, etc.), batch decisions, and UI exposure. Major improvements to Niagara + Skyspark fault handling.
+**Clearer Equipment Alerts and Diagnostics**  
+Fault and alarm information now includes easier-to-understand explanations of what went wrong and how issues have progressed over time. Historical context for ongoing problems helps you prioritize maintenance and respond faster.
 
-**Demo Experience & Report Card Hardening**
-Numerous hotfixes around demo client selection, auto-apply filters for performance/utility views, report-card one-shot triggering, and isDemo signaling. Improves internal demos and client previews.
+**Improved Facility Organization**  
+Track buildings and equipment with greater detail, including better address information and clearer relationships between sites, meters, and systems. This makes reporting and navigation more accurate, especially for larger portfolios.
 
-**Equipment Reference Recovery & Tagging**
-Equip_ref recovery groups, purge tools for ambiguous references, expanded Haystack point mapping, and equipment tagging vocabulary documentation.
+**Automated Reports and Easier Previews**  
+Monthly energy performance summaries (including savings analysis) can now be scheduled for automatic email delivery to you and your stakeholders, with simple unsubscribe links. Previewing your data and reports has also been made more reliable.
 
-**NHaystack / Direct Niagara Progress**
-Continued polling stability, point mapping UI improvements, and security-focused outbound MQTT patterns (no inbound ports required).
+**Stronger Building System Connections**  
+More dependable live data and access from on-site building controls and equipment systems. Equipment information and history are more consistent and complete.
 
-**M&V & Report Cards (Ongoing)**
-Math engine work (ASHRAE regression in dedicated Lambda), scheduled delivery, unsubscribe flows, cumulative savings, and frontend M&V pages (option-c etc.). Still tagged in-progress in many places.
+**Enhanced Savings Tracking and Reporting**  
+Continued refinements to tools that measure and verify energy savings, including automated report generation and better baseline comparisons to demonstrate results clearly.
 
-**Node API Maturity**
-Ongoing controller migrations, dual-write readings (Influx + MySQL quarantine), OpenAPI contract enforcement in CI, and quality gates (lint + typecheck + tests + migration safety).
+**More Reliable Utility and Sustainability Insights**  
+Improvements in how bills and usage data are processed lead to cleaner trends, better anomaly flagging, and higher-quality carbon, water, and cost reports you can confidently share.
 
-Previous releases (earlier 2026 and 2025) included the full PHP-to-Node migration, initial Arcadia webhook processing, Environmental Footprint overhaul with anomaly detection and PDFs, Custom Dashboard precursor work, and broad CI / contract testing improvements.
+For earlier updates, previous releases delivered automated collection of utility bills from major providers, comprehensive environmental footprint reports with easy-to-read charts and exports, foundations for personalized views, and overall improvements in platform speed and reliability.
 
-For the absolute latest, see active branches, worktrees (HCKLBRR-XXX), and the monorepo commit history.
+Let us know if you'd like a walkthrough of any of these capabilities! Reach out at info@huckleberryservices.com.
 
