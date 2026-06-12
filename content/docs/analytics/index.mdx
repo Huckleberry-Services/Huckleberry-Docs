@@ -5,27 +5,27 @@ description: M&V, comparisons, and advanced analytics.
 
 ## Measurement & Verification (M&V)
 
-In active development. Focus is on IPMVP Option C compliance, automated Report Cards, and engineering-grade savings proof.
+This area helps you demonstrate the results of energy improvement projects with credible, well-documented savings analysis. It is designed to support industry-standard approaches to measuring and verifying performance.
 
-Current / in-progress capabilities (many tagged [IN PROGRESS]):
-- Automated monthly Report Card generation and scheduled email delivery (internal + external recipients, with UUID unsubscribe tokens — HCKLBRR-336).
-- Monthly and cumulative savings vs. baseline.
-- Missing data detection and gap alerts.
-- ASHRAE 14 regression models (3P/4P/5P change-point, SLR, degree-day, mean) via dedicated MV-Regression-Lambda service.
-- Model quality metrics (R², CV-RMSE), weather data integration (ACIS/Open-Meteo).
-- Equipment performance trend analysis and history timeline with change logs.
-- Historical report archive.
+Key things you can expect:
+- Regular automated reports (often called Report Cards) that summarize savings.
+- Comparison of current performance against a baseline period.
+- Tools to handle missing data periods so your analysis stays reliable.
+- Ability to schedule reports for delivery to internal teams or external stakeholders, with easy unsubscribe options.
 
-See also the dedicated Report Card automation Lambda and frontend M&V pages (option-c, etc.).
+These capabilities are actively being strengthened to make it easier to produce the documentation needed for sustainability claims and incentive programs.
 
-## Comparisons
+## Comparisons and Benchmarking
 
-See the [Dashboards](/docs/dashboards) page for ranking and period-over-period analysis.
+In the main dashboards you can rank and compare sites by cost, usage, and other metrics. This makes it simple to see which locations are performing well and which may need attention.
 
-## Related Backend
+You can adjust the time periods being compared so the analysis reflects real operating conditions.
 
-- Dual-write readings repository (Influx primary with MySQL fallback/quarantine).
-- Gap imputer and anomaly detection in the API.
-- Full OpenAPI contract (enforced in CI — always run `npm run openapi:generate` in HuckleberryAPI after route changes and commit the updated docs/openapi.json).
+See the Dashboards section for more on rankings, trends, and heat maps.
 
-For implementation details see the monorepo `AGENTS.md` and individual project plans.
+## How Analytics Supports Your Goals
+
+Good analytics turns raw utility and equipment data into actionable information:
+- Spot trends and anomalies early.
+- Support conversations with finance and leadership using clear visuals and exports.
+- Build confidence in your energy improvement results with consistent reporting.
