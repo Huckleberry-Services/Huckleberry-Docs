@@ -3,27 +3,27 @@ title: Profiles & Master Data
 description: Sites, equipment, rules, and operational configuration.
 ---
 
-## Sites & Profiles
+## Sites and Facility Profiles
 
-Master data for facilities. Moving from legacy multi-section questionnaires to a modular Site Profile system (HCKLBRR-433).
+Profiles give you a central place to manage information about your sites and equipment. This makes it easier to keep everything organized and consistent as your portfolio grows or changes.
 
-- Grid and list views with search and export (Excel/CSV).
-- Milestone timeline tracking per site.
-- Equipment inventory aggregated from multiple sources (Skyspark, Niagara/NHaystack, database).
-- Equipment specifications, change logs, and audit trails.
-- Classification by equipment type and system type.
-- Rules management: Skyspark analytics definitions with cost-to-fix analysis.
+In the interface you'll typically find:
+- Searchable lists of your sites and equipment.
+- The ability to export information for reporting or other tools.
+- Tracking of key milestones or events at each location.
+- Equipment details pulled together from your various data sources.
 
-## Equipment & Tagging
+## Equipment Information
 
-- Multi-source equipment resolution.
-- Haystack point mapping and semantic tagging vocabulary.
-- Controls point mapping (JACE) with support for Numeric/Boolean/Enum/String points, inline creation, and cascading alarm config.
+You can view and work with equipment across your facilities, including specifications and history. Having this information in one place helps maintenance teams and analysts work from the same data.
 
-## Recent Enhancements
+Huckleberry pulls equipment information from connected building systems (such as Skyspark and Niagara) as well as other records you maintain.
 
-- Buildings foundation (HCKLBRR-935 series worktrees): per-building addresses, site foreign keys, CRUD support for finer-grained modeling.
-- Equipment reference (equip_ref) recovery tooling and ambiguous group purging.
-- Equipment tagging vocabulary and documentation.
+## Why Good Master Data Matters
 
-See [Controls](/docs/controls) for live data and FDD, and [Dashboards](/docs/dashboards) for visualization.
+Accurate site and equipment information improves the quality of everything else in the platform:
+- More reliable dashboards and comparisons.
+- Better context for alerts and fault detection.
+- Cleaner reports and sustainability tracking.
+
+See the Controls section for how equipment data appears in live monitoring and the Dashboards section for visualization options.

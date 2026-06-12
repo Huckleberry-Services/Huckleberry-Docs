@@ -3,41 +3,23 @@ title: Introduction
 description: Welcome to the Huckleberry documentation.
 ---
 
-Huckleberry is an energy management and utility billing analytics platform by FSM Energy. It provides a unified view of utility consumption, costs, equipment performance, and building controls across facilities — ingesting data from Arcadia, Niagara, Skyspark, manual entry, and more.
+Huckleberry helps organizations track, understand, and improve the energy performance of their buildings and facilities. It brings together your utility bills, real-time equipment data, and building controls in one place so you can see costs, spot issues early, measure savings, and make better decisions.
 
-The customer-facing frontend (Next.js 16 + React 19) and Node.js API (Express + Prisma) deliver dashboards, analytics, M&V, fault detection, and automated reporting.
+These docs are written for the people who use the platform every day — facility managers, energy analysts, sustainability teams, and client administrators.
 
-These docs are a living reference for operators, analysts, and admins. Content is kept in sync with active development across multiple worktrees and the `development` branch.
+## What You Can Do with Huckleberry
 
-## Platform Overview
+- **See the big picture** — View costs, usage, and performance across all your sites in clear dashboards and charts.
+- **Monitor your equipment** — Get live readings and smart alerts when something isn't performing as expected.
+- **Track sustainability** — Understand your carbon and water footprint and generate reports for stakeholders.
+- **Personalize your view** — Follow the sites that matter most to you and build a custom homepage with the information you need most often.
+- **Access your building systems** — Connect directly to many building controls (BMS) for monitoring and adjustments.
+- **Manage utility data** — Automatically pull in bills from providers or enter them manually, then analyze and export the results.
+- **Prove savings** — Use measurement and verification tools to document energy improvements over time.
+- **Stay informed** — Receive alerts and scheduled reports directly in Slack or Microsoft Teams.
 
-**Core Modules (Frontend):**
-- Performance Dashboard — cost, usage, savings, performance scores, heat maps, rankings.
-- Facility Management — live equipment via Skyspark/Niagara, fault detection (FDD), alarms.
-- Environmental Footprint — carbon & water analytics, goals, anomaly detection, branded PDFs.
-- Custom / My Dashboard — follow sites, widget pallets (costs, invoices, equipment status), drag-and-drop, persistence.
-- Facility Controls — authenticated popup access to JACE BMS (HCKLBRR-413).
-- Utility Data / Billing — searchable invoices, Arcadia automated ingestion, manual entry, exports.
-- Measurement & Verification (M&V) — in active development (ASHRAE 14 regression, Report Cards, scheduled delivery).
-- Comparisons, Profiles (sites/equipment/rules), Notifications.
+## Getting in Touch
 
-**Admin & Ops:**
-- Client management, white-label, feature gating (sidebar apps per client).
-- Skyspark point mapping and Niagara/JACE point mapping with alarms.
-- User management, SSO (WorkOS), JWT sessions.
+Need help or have feedback on the platform or these docs? Email us at [info@huckleberryservices.com](mailto:info@huckleberryservices.com).
 
-**Backend & Integrations:**
-- HuckleberryAPI (Node 20, Prisma/MySQL, DynamoDB, Influx dual-write for readings).
-- Arcadia-Plug-Listener (webhooks + SQS for utility statements).
-- NHaystackPoller, ReportCard-Automation-Lambda (Puppeteer PDFs), UrjanetImports.
-- OpenAPI contract enforced via tests (run `npm run openapi:generate` after route changes).
-
-Recent focus areas (active worktrees/branches): Buildings data model foundation, advanced FDD/fault narratives & evidence (HCKLBRR-941), equipment reference recovery, demo experience hardening, M&V math + scheduling.
-
-## Getting Started (Developers)
-
-See individual project READMEs and AGENTS.md / CLAUDE.md at the monorepo root for setup, Docker (local-mysql), testing (node:test for API, Playwright smoke for frontend), and strict git/PR flow.
-
-## Getting in touch
-
-Questions or gaps? [info@huckleberryservices.com](mailto:info@huckleberryservices.com) or the internal Slack/Teams channels.
+We're happy to walk you through any part of the system.
