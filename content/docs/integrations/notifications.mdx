@@ -22,7 +22,31 @@ team to add the webhook for you, or to grant you the role first.
 
 ## Slack
 
-### 1. Create an incoming webhook in Slack
+There are two ways to connect a Slack channel. The one-click **Add to Slack**
+button is the easiest and the recommended path; the manual webhook flow is still
+available if you&rsquo;d rather manage the URL yourself.
+
+### Add to Slack (recommended)
+
+1. In Huckleberry, go to **Account Management &rarr; Client Organization** tab
+   and find the **Notification Webhooks** section.
+2. Click **Add to Slack**.
+3. Slack opens its authorization screen. Choose the workspace and the channel
+   you want Huckleberry to post into, then click **Allow**.
+4. You&rsquo;re returned to Huckleberry and the new channel appears in your
+   webhook list automatically &mdash; there&rsquo;s no URL to copy or paste.
+
+<Callout type="info">
+Slack shows the channel picker for you, and Huckleberry labels the connection
+with the channel and workspace name (for example `#alerts (Acme Corp)`) so
+it&rsquo;s easy to tell your channels apart. Huckleberry only requests the
+`incoming-webhook` permission &mdash; it can post to the channel you pick and
+nothing more.
+</Callout>
+
+### Add a webhook URL manually
+
+Prefer to create and manage the webhook yourself? You can still paste a URL in.
 
 1. Go to [api.slack.com/apps](https://api.slack.com/apps) and sign in.
 2. Click **Create New App** &rarr; **From scratch**. Give it a name (e.g.
@@ -33,17 +57,13 @@ team to add the webhook for you, or to grant you the role first.
 5. Choose the channel you want Huckleberry to post into and click **Allow**.
 6. Copy the generated **Webhook URL**. It will look like
    `https://hooks.slack.com/services/T000.../B000.../...`.
+7. In Huckleberry, go to **Account Management &rarr; Client Organization** tab,
+   find the **Notification Webhooks** section, paste the URL, and save.
 
 <Callout type="warn">
 Treat the webhook URL like a password. Anyone with the URL can post messages
 into that channel. Don&rsquo;t commit it to a public repo.
 </Callout>
-
-### 2. Add the webhook to Huckleberry
-
-In Huckleberry, go to **Account Management &rarr; Client Organization** tab
-and find the **Notification Webhooks** section. Paste the Slack webhook URL
-there and save.
 
 ## Microsoft Teams
 
