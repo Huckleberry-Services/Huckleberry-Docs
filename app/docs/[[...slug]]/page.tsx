@@ -52,6 +52,11 @@ export async function generateMetadata(props: PageProps<'/docs/[[...slug]]'>): P
   return {
     title: page.data.title,
     description: page.data.description,
+    // Declared per page so a query-string variant is never indexed as its
+    // own URL. Resolved against metadataBase in the root layout.
+    alternates: {
+      canonical: page.url,
+    },
     openGraph: {
       images: getPageImage(page).url,
     },
