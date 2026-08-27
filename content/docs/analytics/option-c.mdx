@@ -1,0 +1,197 @@
+---
+title: Measuring Savings with Option C
+description: Whole-building savings analysis — baselines, regression models, ASHRAE-compliant results, adjustments, and exportable M&V reports.
+---
+
+Option C is the whole-building approach to measurement and verification. Rather
+than metering a single piece of equipment, it uses your utility bills for the
+whole building to answer one question: **after the improvements, is the
+building using less than it would have, and how much less?**
+
+Huckleberry builds a statistical model of how the building consumed energy
+before the work, projects that model forward across the period after the work,
+and reports the difference as savings &mdash; documented well enough to support
+sustainability claims and incentive programs.
+
+Find it under **Analytics &rarr; Measurement &amp; Verification &rarr; M&amp;V
+Option-C**. The page is organized as four sections you work through in order:
+**Configuration**, **Data Review**, **Non-Routine Adjustments** and **Savings
+Results**.
+
+<Callout type="info">
+Option C needs a solid run of monthly bills. Six to eight months is the bare
+minimum for a baseline; twelve or more is strongly preferred, because a full
+year captures both a heating and a cooling season.
+</Callout>
+
+## 1. Configuration
+
+### Choose what you&rsquo;re analyzing
+
+Pick the **site**, the **service** (electric or natural gas), and the
+**meters** to include. If a site has several meters, you can analyze them
+together or narrow to the ones affected by the work.
+
+### Bring in the data
+
+**Pull from invoices** uses the utility bills already in Huckleberry &mdash;
+this is the normal path, and it keeps the analysis consistent with the rest of
+your dashboards. You can also upload a file if you&rsquo;re working from data
+Huckleberry doesn&rsquo;t hold.
+
+### Pick your independent variable
+
+The model needs something to explain consumption against.
+
+- **Weather** &mdash; outdoor temperature, the standard choice for buildings
+  whose load is driven by heating and cooling.
+- **Your own monthly data** &mdash; any monthly figure you track as a KPI, such
+  as production volume, occupancy, or operating hours. Useful when weather
+  alone doesn&rsquo;t explain the building.
+- **Both** &mdash; Huckleberry fits weather models, custom-variable models, and
+  blended models, then compares them all.
+
+### Record the measures (ECMs)
+
+An **energy conservation measure** is a piece of work you did: a lighting
+retrofit, a controls upgrade, new rooftop units. For each one you record the
+type, the completion and effective dates, a description, and the expected
+reduction.
+
+You can verify **a package of measures in one project** &mdash; attach several
+ECMs and mark one as the primary measure. Measures you&rsquo;ve saved before
+appear under **Saved ECMs**, so a measure recorded once can be attached to
+another project later rather than re-entered.
+
+<Callout type="info">
+The **effective date** is what the analysis uses to divide before from after.
+A measure completed in March but not fully in service until May should carry
+May as its effective date.
+</Callout>
+
+### Set the periods
+
+- **Comparison period** &mdash; the stretch of bills *before* the work. This is
+  the baseline the model is built from.
+- **Performance period** &mdash; the stretch *after* the work, which the model
+  is projected across.
+
+Huckleberry suggests both windows from the invoice data and the measure&rsquo;s
+effective date. You can accept the suggestion or set the dates yourself; if you
+edit them, your dates are kept.
+
+## 2. Data Review
+
+Before any modeling happens, review what came in. The **meter breakdown** shows
+each meter&rsquo;s usage and cost for the periods you chose, with a total, so
+you can catch a missing month or a meter that doesn&rsquo;t belong before it
+distorts the result.
+
+Two settings live here:
+
+- **Confidence level** &mdash; how much statistical certainty the reported
+  savings range is quoted at.
+- **Weather normalization** &mdash; analyze against **actual weather** (what
+  the building really experienced) or against **typical weather** (a long-run
+  normal year). Typical-year normalization is what you want when you need a
+  number that isn&rsquo;t distorted by an unusually mild or harsh season, and
+  it&rsquo;s what makes one year&rsquo;s result comparable to another.
+
+Then press **Run Analysis**. Huckleberry fits a family of regression models to
+the baseline and scores each one.
+
+## 3. Choosing a model
+
+The model comparison table lists every model that was fitted, with its fit
+statistics. Huckleberry marks one as **Recommended**, grades the others, and
+flags any that are **Invalid**. You can accept the recommendation or select a
+different model, and your choice is recorded with the project.
+
+### How a model is judged
+
+Acceptance follows **ASHRAE Guideline 14, section 4.3.2.1(e)** for
+whole-building analysis, which judges a model on its baseline **CV(RMSE)**
+alone. The limit depends on how long your performance period is:
+
+| Performance period | CV(RMSE) limit (energy) | CV(RMSE) limit (demand) |
+| --- | --- | --- |
+| Under 12 months | 20% | 30% |
+| 12&ndash;60 months | 25% | 35% |
+| Beyond 60 months | 30% | 40% |
+
+R&sup2; and NMBE are shown alongside for information &mdash; they are useful
+context, but they are not the acceptance test for Option C.
+
+### If no model meets the criterion
+
+The page explains which of the usual three causes applies:
+
+- **A weak weather&ndash;energy relationship** &mdash; the building&rsquo;s use
+  doesn&rsquo;t track temperature closely. Common with heavy plug loads, data
+  centers, or steady internal heat gain. Try a custom variable instead of
+  weather.
+- **Too few data points** &mdash; six to eight months is the minimum and often
+  isn&rsquo;t enough. Extend the baseline toward twelve or more months.
+- **Operational changes during the baseline** &mdash; if occupancy, schedules,
+  or equipment changed while the baseline was being measured, no consistent
+  pattern exists to model. Move the window, or record the change as a
+  non-routine adjustment.
+
+### Model drift
+
+Once a project is saved, Huckleberry watches its model over time and raises a
+**drift** alert when the relationship stops holding &mdash; CV(RMSE) degrading,
+a worsening trend, or the savings signal shifting. Drift usually means
+something real changed in the building, and it&rsquo;s a prompt to revisit the
+baseline rather than to distrust the tool. Drift monitoring can be turned on or
+off per project, and alerts can be acknowledged as you work through them.
+
+## 4. Non-routine adjustments
+
+Sometimes the building changes for reasons that have nothing to do with the
+energy work &mdash; a server room is added, a floor is taken out of service, a
+tenant moves in. Left alone, those changes get counted as savings or as
+losses.
+
+A **non-routine adjustment** corrects for them. Add one with a name (for
+example, &ldquo;Server room addition&rdquo;), an optional description, and a
+justification or source. Documenting *why* the adjustment was made is what
+keeps the analysis defensible when someone reviews it later.
+
+## 5. Savings results
+
+The results section reports:
+
+- **Annual normalized savings** &mdash; the headline figure, expressed for a
+  full year under typical conditions.
+- **Normalized savings %** &mdash; savings as a share of what the building
+  would otherwise have used.
+- **Typical-year baseline and performance totals** &mdash; the two figures the
+  savings are the difference between.
+
+Charts show the fitted model against the actual data, the residuals, and
+savings over time. A glossary is available on-screen for each statistic, so you
+don&rsquo;t have to leave the page to remember what CV(RMSE) means.
+
+**Export as PDF** produces the full report &mdash; configuration, periods,
+measures, model and its statistics, adjustments, charts and results &mdash; as
+one document you can attach to an incentive application or hand to a client.
+
+## Saving and comparing projects
+
+**Save Project** stores everything: scope, periods, measures, the selected
+model, adjustments and results. Saved projects can be reloaded, updated in
+place, or saved as a new project to fork an alternative analysis. **New
+Project** clears the page for a fresh start.
+
+**Project comparison** puts two saved projects side by side &mdash; their
+periods, service type, selected model, CV(RMSE) and whether each meets the
+ASHRAE criterion &mdash; which is the quickest way to justify one approach over
+another, or to show a result holding steady across two reporting cycles.
+
+## Related
+
+- [Analytics &amp; Measurement &amp; Verification](/docs/analytics) &mdash; how
+  M&amp;V fits with report cards and benchmarking.
+- [Utility Billing &amp; Data](/docs/utility-billing) &mdash; where the bills
+  behind an Option C analysis come from.
