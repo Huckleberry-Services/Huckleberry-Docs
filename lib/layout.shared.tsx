@@ -3,6 +3,9 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { appName } from './shared';
 
 const SITE_URL = 'https://huckleberryservices.com';
+// "Platform" goes to the app itself, not the marketing page describing it —
+// someone reading the docs is a user looking for their portal, not a prospect.
+const PORTAL_URL = 'https://portal.huckleberryservices.com';
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -27,7 +30,7 @@ export function baseOptions(): BaseLayoutProps {
     links: [
       {
         text: 'Platform',
-        url: `${SITE_URL}/platform`,
+        url: PORTAL_URL,
         external: true,
       },
       {
