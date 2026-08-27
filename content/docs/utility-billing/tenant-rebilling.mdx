@@ -1,0 +1,265 @@
+---
+title: Tenant Rebilling
+description: Rebill utility costs to tenants with effective-dated bill % rules, an accounting workbook, and branded per-tenant statements.
+---
+
+Tenant Rebilling turns the utility bills Huckleberry already collects into
+tenant rebills. You tell it who your tenants are, which meters they sit on,
+and what percentage of each meter they are billed. For any period you choose,
+it produces two things:
+
+- **A coding workbook (Excel)** &mdash; one row per meter, tenant, service and
+  recoverability, with a period-by-period dollar grid, subtotals and a usage
+  analysis. This is the file your accounting team codes from.
+- **Tenant statements (PDF)** &mdash; one branded statement per tenant showing
+  only that tenant&rsquo;s lines, with usage, cost, $/unit, bill % and the
+  amount billed, plus a 12-month history. This is the document you send the
+  tenant.
+
+Find it under **Analytics &rarr; Utility Data &rarr; Utility Bills**, then the
+**Utility Billing** button at the top of the page. Configuration lives beside
+it in **Utility Billing &mdash; Setup**.
+
+<Callout type="info">
+**Bill % are your commercial discretion, not a share of a whole.** They don&rsquo;t
+have to add up to 100% across a meter&rsquo;s tenants, and a single tenant may be
+billed more than 100% if that&rsquo;s what the lease says. There is no
+&ldquo;unallocated&rdquo; or &ldquo;house&rdquo; line on any output &mdash;
+whatever you don&rsquo;t bill simply doesn&rsquo;t appear.
+</Callout>
+
+## Quick start
+
+1. **Set up** &mdash; in Utility Billing Setup, add your tenants, assign their
+   meters, and add a bill % rule for each meter/tenant pair.
+2. **Open** &mdash; Utility Bills &rarr; Utility Billing.
+3. **Scope** &mdash; tick the sites to include (leave all unchecked for the
+   whole portfolio) and, optionally, specific meters.
+4. **Period** &mdash; choose Monthly, Quarterly, Annual or Range and set the
+   From/To dates.
+5. **Bill %** &mdash; saved rules resolve automatically; add an ad-hoc % here
+   to override for this report only.
+6. **Run** &mdash; pick Excel and/or PDF on the Output step, then
+   **Run &amp; download**. The run is recorded and can be re-downloaded later.
+
+## Setting up tenants, meters and bill %
+
+Utility Billing Setup has three tabs. Everything the wizard needs is
+configured here once, then reused on every run.
+
+### Tenants
+
+Name is the only required field, but the rest matters downstream:
+
+- **Billing address** &mdash; printed as the addressee on the tenant&rsquo;s
+  statement.
+- **Contact email / phone** &mdash; who the statement goes to.
+- **Leased sq ft** &mdash; feeds the square-footage bill % suggestion.
+- **Lease ref** &mdash; your own reference for the lease.
+- **Active from / to** &mdash; setting an *Active to* date deactivates a tenant
+  while keeping it on historical reports.
+
+<Callout type="warn">
+Deactivate rather than delete. Deleting a tenant also removes its meter
+assignments. When a lease ends, set an **Active to** date instead &mdash; the
+tenant stays intact on every report you&rsquo;ve already produced.
+</Callout>
+
+### Meter assignments
+
+Pick a tenant, see the meters assigned to it, and add or remove them. A meter
+can belong to several tenants &mdash; that&rsquo;s the normal case for a shared
+house meter split across suites.
+
+### Bill % rules
+
+A rule ties one meter to one tenant and says what portion of that meter&rsquo;s
+cost the tenant is billed. Each rule carries a type, a recoverability, and an
+optional effective window.
+
+| Type | Behavior |
+| --- | --- |
+| **Fixed** | You enter the percentage (25 = 25%). Any positive number is accepted, including over 100%. |
+| **Submeter** | Always 100% &mdash; a dedicated sub-meter bills entirely to one tenant. No percentage to enter. |
+| **Square footage** | No stored percentage. It&rsquo;s suggested at run time pro-rata from the tenant&rsquo;s leased sq ft against the building&rsquo;s sq ft. Store it as a Fixed rule if you&rsquo;d rather pin the number. |
+
+**Recoverability** &mdash; CAM, Non-CAM or DOAH &mdash; is the accounting
+bucket that selects the GL code for the line. The code legend is configured for
+your account; a service and recoverability combination with no code simply
+leaves the Code cell blank, and the line still bills.
+
+**Effective from / to** make rules date-aware, so a percentage can change
+part-way through a year and old periods still bill at the old rate. Leave
+*Effective from* blank to cover all periods, and *Effective to* blank to bill
+indefinitely.
+
+<Callout type="warn">
+Effective windows can&rsquo;t overlap for the same meter and tenant, and the
+bounds are inclusive &mdash; a rule ending 28 Feb and another starting 28 Feb
+collide. Start the next window on the following calendar day.
+</Callout>
+
+### Manual billing entries
+
+Manual Billing Entries cover everything the provider feed doesn&rsquo;t give
+you. All three kinds flow into the export automatically, and manual values take
+precedence over the automated feed.
+
+- **Manual meter** &mdash; a meter on site that Huckleberry doesn&rsquo;t
+  receive automatically. You key its cost and usage per month.
+- **Override a provider line** &mdash; replace a delivered cost or usage for one
+  period when the delivered value is wrong. Deleting the override restores the
+  original value.
+- **Flat fee / adder** &mdash; fixed charges such as fire service, admin/CAM
+  fees or stormwater, optionally recurring every month.
+
+Each entry carries a period, service type, recoverability, cost, and optionally
+usage and unit. A flat fee attached to a tenant with no meter is billed 100% to
+that tenant, one line per applicable month.
+
+## The wizard, step by step
+
+Six steps. The stepper at the top is clickable, so you can jump back at any
+point. Each step is checked when you press **Next**, and **Run** re-checks all
+six and drops you back on the first one that needs attention.
+
+### 1. Scope
+
+Tick the sites to include; leave everything unchecked to run the whole
+portfolio. Optionally narrow to specific meters &mdash; the meter picker is
+filtered to the sites you chose. Opening the wizard from a site page
+pre-selects that site.
+
+### 2. Period
+
+Choose **Monthly**, **Quarterly**, **Annual** or **Range**, then the From and
+To dates. Monthly produces a month-by-month grid; the other grains roll the
+same window up into fewer columns. The start date must be on or before the end
+date.
+
+### 3. Bill %
+
+The top of the step lists your saved rules, which resolve live when the report
+runs &mdash; if your setup is complete, there&rsquo;s nothing to do here.
+
+Below that, **ad-hoc one-off bill %** let you bill something differently just
+this once. One row per scoped meter is seeded automatically; fill in the tenant
+and the percentage as a whole number (enter 25 for 25%). **+ New tenant**
+creates a tenant inline without leaving the wizard.
+
+<Callout type="info">
+An ad-hoc % applies to this report only and never changes the saved rule. A row
+you leave completely blank is ignored, so a scoped meter you don&rsquo;t bill
+won&rsquo;t block the run &mdash; but a row with a percentage and no tenant (or
+the reverse) will be flagged.
+</Callout>
+
+### 4. Coding &amp; columns
+
+**Include GL codes** adds the Code column to the workbook. **Group / subtotal
+by** tenant, service and/or building controls the subtotal rows.
+
+### 5. Output
+
+Tick **Excel** (coding workbook), **PDF** (tenant statements), or both &mdash;
+at least one is required. When PDF is on you can tick specific tenants; leave
+the list empty to produce statements for every tenant with billed lines.
+
+### 6. Run
+
+A summary of the period, scope, GL setting, formats and how many bill % lines
+will be produced. Optionally tick **Save this configuration as a reusable
+template** and name it. Then **Run &amp; download**.
+
+## What you get
+
+### The coding workbook (Excel)
+
+The internal, accounting-facing output. The first sheet is one row per meter,
+tenant, service and recoverability, with the account number, service address,
+premise ID, service, meter, usage, unit, GL code, bill % and tenant &mdash;
+followed by one dollar column per period, then TOTAL rows per service, per
+tenant, and a grand total. Currency and percentage formats are applied, so the
+file opens correctly in Excel and Google Sheets.
+
+The second sheet is a period-over-period usage analysis: usage per period with
+the percentage change against the prior period.
+
+### Tenant statements (PDF)
+
+The tenant-facing document, one tenant per page in a combined file. Each
+statement carries your branding, the tenant&rsquo;s name and billing address,
+the period, and a line table showing the month, service and meter, the
+meter&rsquo;s full usage and cost, the blended $/unit rate, the bill % applied,
+and the amount billed.
+
+Below the lines sit subtotals by service and recoverability, then the
+tenant&rsquo;s total. Where history exists, the statement also shows a
+prior-period comparison (this period against the previous one and against the
+same period last year) and a 12-month history of cost by month.
+
+A statement shows only that tenant&rsquo;s lines &mdash; no other
+tenant&rsquo;s figures ever appear. Tenants with no billed lines are skipped
+when you run for all tenants; asking for one specific tenant with no lines
+gives you a zero statement rather than an error.
+
+## Run history and templates
+
+Every run is stored as an immutable snapshot. **Run history** lists them newest
+first with the run number, period, billed total and date, and re-downloads
+either artifact.
+
+<Callout type="info">
+Old reports never change. A stored run re-renders from its own snapshot, so a
+statement you download six months from now is identical to the one you sent
+&mdash; even if the bill % rules, tenants or templates have changed since. (The
+tenant&rsquo;s name and address are read live, so a corrected address does show
+on a re-download; the money never moves.)
+</Callout>
+
+**Templates** save a configuration: scope, columns, grouping, the GL toggle,
+period type and output formats. They deliberately do not save the dates or the
+bill % &mdash; you set the window for each run, and percentages always resolve
+live. Pick one from **Run from template** to pre-fill the wizard.
+
+## How the money is calculated
+
+- Each line is the meter value multiplied by the bill %, rounded to the cent
+  independently.
+- Subtotals and totals are the sum of the already-rounded lines &mdash; never a
+  re-multiplication &mdash; so a statement&rsquo;s lines always add up to its
+  total exactly.
+- Quarterly and annual runs are computed monthly first and then rolled up, so a
+  quarter equals the sum of its three months to the penny, and a percentage
+  that changed mid-quarter is applied correctly to each month.
+- There is no penny redistribution and no gross-up. Unbilled remainder is not
+  tracked, reported, or assigned to anyone.
+- Usage is rounded to three decimals, and a fixed-fee line with no usage stays
+  blank rather than fabricating a number.
+
+## Troubleshooting
+
+**&ldquo;Nothing to export&rdquo;** &mdash; the run produced no billed lines,
+and the message tells you which of the two causes it is: either there&rsquo;s
+no invoice data for those meters in that period (check the year and the scope),
+or no bill % resolved for them (add a rule in Setup, or an ad-hoc % in step 3).
+You&rsquo;re never handed an empty file.
+
+**A tenant is missing from the statements** &mdash; that tenant produced no
+billed lines: either it has no meter assignment or bill % rule for the period,
+or there&rsquo;s no utility data for its meters in that window.
+
+**I changed a rule &mdash; do my old reports change?** No. Every run is stored
+as a snapshot and re-renders exactly as first produced.
+
+**My percentage changed mid-year** &mdash; add a second rule with its own
+effective window rather than editing the first. Each month then bills at the
+rate that was in force.
+
+**Why is a Code cell blank?** That service and recoverability combination has no
+code in your legend, or the service isn&rsquo;t part of the legend at all. The
+line still bills; only the code is blank.
+
+**The wizard says a step needs attention when I press Run** &mdash; running
+re-validates all six steps and jumps you to the first problem, so a step you
+skipped past can still stop the run.
