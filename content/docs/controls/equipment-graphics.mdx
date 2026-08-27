@@ -1,0 +1,112 @@
+---
+title: Equipment Graphics
+description: Open a piece of equipment's own controls graphic from inside Huckleberry, and what has to be in place for it to work.
+---
+
+Every piece of equipment connected to a Niagara station can open its own
+controls graphic &mdash; the same view your integrator built in the station
+&mdash; without leaving Huckleberry and without logging into a separate system.
+
+You&rsquo;ll find it on an equipment&rsquo;s detail page and in the Facility
+Controls view. Where a graphic is available, the equipment carries a link to it;
+opening the link displays the graphic over the page, titled with the equipment
+it belongs to. Graphics can take a moment to load, and you&rsquo;ll see a notice
+while that happens rather than a blank panel.
+
+<Callout type="info">
+Graphics show what the station shows. If your integrator built the view to allow
+adjustments, you can make them here; if it&rsquo;s a read-only display, it stays
+read-only. Huckleberry doesn&rsquo;t add or remove control from the graphic.
+</Callout>
+
+## What has to be in place
+
+Five things have to line up. The first two are set up with you during
+onboarding; the last three are usually in your station already, and are the ones
+worth checking when a graphic doesn&rsquo;t appear.
+
+### 1. A connected station
+
+The site needs a Niagara station configured in Huckleberry, with its address and
+credentials. This is the same connection that collects your equipment readings,
+so if you&rsquo;re seeing live data from a site, the station is connected.
+
+### 2. A graphics address, recorded separately
+
+Huckleberry records two addresses for a station: the **station address** it
+reads data from, and the **graphics address** &mdash; the landing page your Px
+views are served from. They&rsquo;re kept apart on purpose.
+
+<Callout type="warn">
+Don&rsquo;t replace the station address with a link to a graphics page. They
+look interchangeable and they aren&rsquo;t: the station address is what data
+collection uses, and pointing it at a graphics page silently stops readings
+coming in from that site. If you need the graphics location changed, ask us
+rather than editing the station address.
+</Callout>
+
+### 3. Equipment linked to its device in the station
+
+Huckleberry has to know which component in the station a piece of equipment
+corresponds to. That link is made when your points are mapped. Equipment that
+was created by hand and never mapped to the station has nothing to open, and
+will say so.
+
+### 4. A view assigned to the equipment in the station
+
+This is the one that most often explains a missing graphic. Huckleberry links to
+the **equipment&rsquo;s own component**, and Niagara displays whichever view is
+assigned to that component. If your integrator assigned a Px view to the
+component, it appears. If the graphic exists in the station but isn&rsquo;t
+assigned to that component &mdash; it lives only in a folder, or it&rsquo;s
+reachable from a menu page &mdash; there is nothing for the link to open.
+
+Huckleberry verifies every link against the station before showing it, so an
+equipment either gets a graphic that works or no link at all. You will never be
+handed a link that lands on a station error page.
+
+<Callout type="info">
+If your integrator assigns a view later, you don&rsquo;t need to tell us.
+Equipment with no graphic is re-checked against the station about once a day, so
+new views are picked up on their own.
+</Callout>
+
+### 5. A reachable station
+
+The station has to be online and reachable from Huckleberry at the moment you
+open the graphic. A station that&rsquo;s down, or unreachable because of a
+network or firewall change, will report that it didn&rsquo;t answer.
+
+## Signing in to the station
+
+Where your station is hosted on a Huckleberry address, opening a graphic signs
+you in automatically &mdash; you go straight to the view.
+
+Where your station is hosted on your own domain, your browser won&rsquo;t carry
+a Huckleberry session across to it, so the graphic opens at the station&rsquo;s
+own login page and you sign in with your station credentials. This is a
+limitation of how browsers scope sessions between domains, not a configuration
+mistake.
+
+<Callout type="info">
+Niagara allows one session per user account. If the station already has a
+session open for your account &mdash; another tab, another machine, or a session
+that didn&rsquo;t close cleanly &mdash; use **Reconnect** to sign out of the
+station and start fresh. Reconnect signs you out of the station itself, not just
+of Huckleberry, which is what clears a stuck session.
+</Callout>
+
+## What the messages mean
+
+| What you see | What it means |
+| --- | --- |
+| **No facility controller** | The client has no Niagara station configured. Nothing to open. |
+| **Not linked to Niagara** | The station is connected, but this equipment isn&rsquo;t mapped to a device on it. |
+| **No graphic found** | The equipment is mapped, but its component has no view assigned in the station. See requirement 4 above. |
+| **Station unreachable** | The station didn&rsquo;t answer. It may be offline, or a network change may have cut the route. |
+| **Unable to open a session** | The station answered but the sign-in didn&rsquo;t complete. Often a stuck session &mdash; try **Reconnect**. |
+
+If a graphic is missing and the equipment is mapped, the station is up, and the
+component has a view assigned, get in touch at
+[info@huckleberryservices.com](mailto:info@huckleberryservices.com) and
+we&rsquo;ll take a look.
