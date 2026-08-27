@@ -14,17 +14,21 @@ and reports the difference as savings &mdash; documented well enough to support
 sustainability claims and incentive programs.
 
 Find it under **Analytics &rarr; Measurement &amp; Verification &rarr; M&amp;V
-Option-C**. The page is organized as four sections you work through in order:
-**Configuration**, **Data Review**, **Non-Routine Adjustments** and **Savings
-Results**.
+Option-C**. The page is organized as four sections you work through in order
+&mdash; **Configuration**, **Data Review**, **Non-Routine Adjustments** and
+**Savings Results** &mdash; and choosing a model happens in between, once
+you&rsquo;ve run the analysis from Data Review.
 
-<Callout type="info">
-Option C needs a solid run of monthly bills. Six to eight months is the bare
-minimum for a baseline; twelve or more is strongly preferred, because a full
-year captures both a heating and a cooling season.
+<Callout type="warn">
+**Use twelve continuous months of baseline bills if the result has to stand up
+to scrutiny.** Huckleberry will fit a model on as little as six to eight
+months, which is useful for a first look, but ASHRAE&rsquo;s whole-building
+compliance path requires an unbroken twelve-month baseline &mdash; and a full
+year is what captures both a heating and a cooling season. See
+[how a model is judged](#how-a-model-is-judged).
 </Callout>
 
-## 1. Configuration
+## Configuration
 
 ### Choose what you&rsquo;re analyzing
 
@@ -80,7 +84,7 @@ Huckleberry suggests both windows from the invoice data and the measure&rsquo;s
 effective date. You can accept the suggestion or set the dates yourself; if you
 edit them, your dates are kept.
 
-## 2. Data Review
+## Data Review
 
 Before any modeling happens, review what came in. The **meter breakdown** shows
 each meter&rsquo;s usage and cost for the periods you chose, with a total, so
@@ -100,7 +104,7 @@ Two settings live here:
 Then press **Run Analysis**. Huckleberry fits a family of regression models to
 the baseline and scores each one.
 
-## 3. Choosing a model
+## Choosing a model
 
 The model comparison table lists every model that was fitted, with its fit
 statistics. Huckleberry marks one as **Recommended**, grades the others, and
@@ -109,9 +113,10 @@ different model, and your choice is recorded with the project.
 
 ### How a model is judged
 
-Acceptance follows **ASHRAE Guideline 14, section 4.3.2.1(e)** for
-whole-building analysis, which judges a model on its baseline **CV(RMSE)**
-alone. The limit depends on how long your performance period is:
+Huckleberry checks one thing automatically: the baseline **CV(RMSE)** limit set
+out in **ASHRAE Guideline 14, section 4.3.2.1(e)** for whole-building analysis.
+The limit depends on how much performance-period data the savings are computed
+from:
 
 | Performance period | CV(RMSE) limit (energy) | CV(RMSE) limit (demand) |
 | --- | --- | --- |
@@ -120,7 +125,19 @@ alone. The limit depends on how long your performance period is:
 | Beyond 60 months | 30% | 40% |
 
 R&sup2; and NMBE are shown alongside for information &mdash; they are useful
-context, but they are not the acceptance test for Option C.
+context, but the criterion in 4.3.2.1(e) is CV(RMSE).
+
+<Callout type="warn">
+**A model marked ASHRAE-valid has passed the CV(RMSE) test, not the whole
+compliance path.** If you are claiming savings under ASHRAE Guideline
+14&rsquo;s whole-building prescriptive path, that path also requires a baseline
+spanning a continuous twelve months with no gaps in energy or independent-variable
+data, at least nine valid baseline data points, no baseline points dropped,
+expected savings above 10% of whole-building use, and a savings algorithm that
+passes the net-determination-bias test. Those conditions are yours to satisfy
+&mdash; Huckleberry doesn&rsquo;t verify them for you. Check them before you put
+a number in an incentive application.
+</Callout>
 
 ### If no model meets the criterion
 
@@ -130,8 +147,10 @@ The page explains which of the usual three causes applies:
   doesn&rsquo;t track temperature closely. Common with heavy plug loads, data
   centers, or steady internal heat gain. Try a custom variable instead of
   weather.
-- **Too few data points** &mdash; six to eight months is the minimum and often
-  isn&rsquo;t enough. Extend the baseline toward twelve or more months.
+- **Too few data points** &mdash; six to eight months is the least the tool
+  will work with and often isn&rsquo;t enough to find a pattern. Extend the
+  baseline to twelve or more continuous months, which is what the compliance
+  path requires anyway.
 - **Operational changes during the baseline** &mdash; if occupancy, schedules,
   or equipment changed while the baseline was being measured, no consistent
   pattern exists to model. Move the window, or record the change as a
@@ -146,7 +165,7 @@ something real changed in the building, and it&rsquo;s a prompt to revisit the
 baseline rather than to distrust the tool. Drift monitoring can be turned on or
 off per project, and alerts can be acknowledged as you work through them.
 
-## 4. Non-routine adjustments
+## Non-routine adjustments
 
 Sometimes the building changes for reasons that have nothing to do with the
 energy work &mdash; a server room is added, a floor is taken out of service, a
@@ -158,7 +177,7 @@ example, &ldquo;Server room addition&rdquo;), an optional description, and a
 justification or source. Documenting *why* the adjustment was made is what
 keeps the analysis defensible when someone reviews it later.
 
-## 5. Savings results
+## Savings results
 
 The results section reports:
 
