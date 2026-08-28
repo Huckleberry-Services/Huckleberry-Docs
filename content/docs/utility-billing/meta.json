@@ -1,4 +1,4 @@
 {
   "title": "Utility Billing & Data",
-  "pages": ["index", "tenant-rebilling"]
+  "pages": ["index", "bill-scanning", "tenant-rebilling"]
 }
