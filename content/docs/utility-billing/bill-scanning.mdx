@@ -1,0 +1,83 @@
+---
+title: Bill Scanning (OCR)
+description: Upload a utility bill PDF or photo and let Huckleberry read it into the manual entry form for you to review and submit.
+---
+
+Bill Scanning reads a utility bill for you. Upload the PDF (or a photo or scan)
+and Huckleberry extracts the vendor, account number, service period, and the
+itemized charges &mdash; then opens the manual entry form with everything filled
+in for your review. Instead of typing a bill line by line, you check it.
+
+Find it under **Analytics &rarr; Utility Data &rarr; Utility Entry**, then the
+**Upload a Bill (OCR)** button next to Manual Entry.
+
+<Callout type="info">
+**Nothing is saved until you submit.** Scanning only pre-fills the form. You
+review every field, correct anything the scan got wrong, and the bill is
+recorded only when you complete the wizard &mdash; the same way as a manual
+entry.
+</Callout>
+
+## Scanning a Bill
+
+1. Open **Utility Entry** and choose **Upload a Bill (OCR)**.
+2. Upload the bill &mdash; PDF, PNG, JPEG, or TIFF, up to 10&nbsp;MB.
+   Multi-page PDFs are fine; all pages are read together.
+3. Wait a few seconds while the bill is scanned.
+4. The manual entry form opens with the extracted values filled in. Review,
+   correct, and submit as usual. The uploaded file is kept with the entry as
+   the bill image.
+
+Where a name on the bill matches a vendor or service type you already use,
+the form fills in your existing name rather than the bill&rsquo;s spelling, so
+your data stays consistent.
+
+## Reviewing What Was Read
+
+Every extracted field carries a colored dot showing how confident the scan is:
+
+- **Green** &mdash; read cleanly; a glance is usually enough.
+- **Amber** &mdash; probably right; worth checking against the bill.
+- **Red** &mdash; uncertain; check it carefully.
+
+A banner at the top offers **Review next field**, which steps you through the
+fields that deserve attention in order. The original bill is displayed
+side-by-side with the form, so you can compare without switching windows. Once
+you edit a field, its marker clears &mdash; the value is yours, not the
+scan&rsquo;s.
+
+**The location is always your choice.** Huckleberry never assigns a bill to a
+site on its own. When the account&rsquo;s history or the service address on the
+bill points to one of your sites, a suggestion appears under the Location
+field &mdash; one click applies it, but only you can make that call.
+
+## Good to Know
+
+- **PDFs with several statements** &mdash; some utilities bundle multiple
+  statements in one file. You&rsquo;ll be asked which one to enter; upload the
+  file again for the others.
+- **Duplicate warning** &mdash; if a bill for the same account and period is
+  already in Huckleberry, the form warns you before you submit a second copy.
+- **Charges that don&rsquo;t add up** &mdash; if the itemized lines don&rsquo;t
+  reach the bill total, the difference appears as a clearly labeled
+  reconciliation line for you to resolve.
+
+## If a Bill Won&rsquo;t Scan
+
+- **Password-protected or damaged files** can&rsquo;t be read &mdash;
+  you&rsquo;ll see a clear message. Print-to-PDF from the utility&rsquo;s
+  portal usually produces a readable copy.
+- **Poor-quality photos** scan with lower confidence. A straight-on photo in
+  good light, or the original PDF, works best.
+- If a document doesn&rsquo;t look like a utility bill, the form says so and
+  asks you to check every field.
+- Manual entry is always available as a fallback &mdash; a failed scan never
+  blocks you from entering the bill by hand.
+
+<Callout type="info">
+**Bill Scanning is enabled per account.** If you don&rsquo;t see the
+**Upload a Bill (OCR)** button, it isn&rsquo;t switched on for your
+organization yet &mdash; reach out at
+[info@huckleberryservices.com](mailto:info@huckleberryservices.com) to have it
+enabled.
+</Callout>
