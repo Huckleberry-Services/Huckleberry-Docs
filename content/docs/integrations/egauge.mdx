@@ -1,0 +1,175 @@
+---
+title: eGauge Meters
+description: Connect an eGauge energy or water meter and bring its interval readings into Huckleberry, with history backfilled automatically.
+---
+
+Huckleberry can read interval data straight from an **eGauge** meter. Connect
+one register (one measured circuit or feed) and Huckleberry imports its history,
+then keeps polling for new readings. Electricity comes in as kWh per interval
+plus average kW. Water comes in by volume and is shown in gallons.
+
+A guided setup walks you through the connection in seven short steps and shows
+you a sample of real readings before anything is saved.
+
+<Callout type="info">
+**One register becomes one meter.** If an eGauge measures several circuits,
+for example the grid feed and a solar array, set up each register you want
+as its own connector.
+</Callout>
+
+## Before You Start
+
+You'll need:
+
+- **The meter's HTTPS address.** This is usually the eGauge proxy address,
+  `https://<device-name>.egauge.io`, or the meter's own public HTTPS
+  address. Addresses that only work inside your building's network can't be
+  reached by Huckleberry.
+- **A username and password** for the meter. A read-only account is enough.
+- **The site the meter serves**, already set up in Huckleberry.
+
+## Setting Up a Connector
+
+Go to **Admin &rarr; Data Connectors**, choose **+ New connector**, select
+**eGauge meter**, and click **Next**.
+
+![The New connector dialog with the eGauge meter template](/images/integrations/egauge/01-new-connector.png)
+
+### 1. Site
+
+Pick the site the meter serves. Its readings are stored on a meter at this
+site.
+
+![Choosing the site](/images/integrations/egauge/02-site.png)
+
+### 2. Connect
+
+Enter the meter's address, username, and password, then choose **Test
+connection and discover registers**. Testing saves nothing. The credentials
+are stored, encrypted, only when you activate the connector, and they're
+never shown again.
+
+![Entering the eGauge address and credentials](/images/integrations/egauge/03-connect.png)
+
+If the test fails, the message tells you why. Common causes:
+
+- **Wrong username or password.** Check the credentials on the meter.
+- **Address not reachable.** Use the `https://` proxy address rather than a
+  local network address.
+
+### 3. Register
+
+Huckleberry lists every register on the meter. Pick the one to import.
+
+![Picking a register](/images/integrations/egauge/04-register.png)
+
+Huckleberry decides what a register measures from its type on the meter, not
+from its name, so a register labelled "Water" that actually measures power is
+still treated as electricity. A register that's already imported by another
+connector is marked **Already connected**, with a link to that connector.
+
+### 4. Units
+
+This step shows what the register measures and how its readings are stored.
+
+![How the register's readings will be stored](/images/integrations/egauge/05-units.png)
+
+- **Electricity** registers are stored as kWh per interval, plus average kW.
+  There's nothing to confirm.
+- **Volume** registers can measure water, gas, or other flows. Confirm that the
+  register measures **water** to continue. Water is stored by volume and
+  shown in gallons. Gas and other volume registers aren't supported yet.
+
+### 5. Solar & Flow
+
+Huckleberry suggests values based on the register. Check them, because they
+decide how the meter counts in your totals.
+
+![Choosing solar and flow](/images/integrations/egauge/06-solar-flow.png)
+
+| The register is&hellip; | Solar | Flow |
+|---|---|---|
+| The grid feed at a site with solar panels | Yes | Net |
+| A solar (PV) inverter | Yes | Generation |
+| A generator | No | Generation |
+| A load or a whole-building feed | No | Consumption |
+
+A **Net** register measures what's drawn from the grid minus what's exported,
+so some intervals can be negative. That's expected.
+
+The solar question appears only for electricity.
+
+### 6. Meter
+
+Create a new meter at the site, or attach the register to an existing meter.
+Only meters that match the utility, flow, and solar choice, and that don't
+already receive readings from somewhere else, are offered. Give the meter and
+the connector a name.
+
+![Naming the meter and connector](/images/integrations/egauge/07-meter.png)
+
+### 7. Preview and Activate
+
+Choose the reading **interval** (1 minute, 5 minutes, 15 minutes, or 1 hour)
+and how many **days of history** to backfill (up to 730).
+
+Huckleberry runs a set of checks and reads a sample of real intervals from the
+meter. Nothing is saved yet. The sample shows the total, the time zone the
+meter reports in, how each value was calculated, and any gaps.
+
+![The preview, with checks and sample readings](/images/integrations/egauge/08-preview.png)
+
+When every check passes, choose **Activate**. Huckleberry starts importing the
+history right away, and then polls for new readings on the interval you picked.
+
+## Watching the Import
+
+Open the connector from **Data Connectors** to see how the import is going.
+
+![Health and progress for an active eGauge connector](/images/integrations/egauge/09-health.png)
+
+- **Health and progress** shows the connector's status, the last sync, and
+  any failures in a row.
+- **Backfill and data** shows how far back history goes, how much has been
+  imported, and the latest reading stored. The bar fills as the backfill
+  runs. A long history is imported over several runs.
+- **Gaps** are periods where the meter had no data. **Dropped resets and
+  spikes** are intervals Huckleberry left out because the meter's counter
+  reset or jumped implausibly. Leaving them out keeps your totals accurate.
+- **Source** shows the meter's details, including its clock. A large clock
+  skew can make readings land in the wrong interval.
+
+Use **Sync now** to run an import immediately, and **Pause** to stop polling
+for a while.
+
+## Changing a Connector
+
+Some settings can be changed at any time: the connector's name, the flow, the
+solar choice, and how many days of history to backfill. A longer backfill
+reads further back; a shorter one just stops reading older history.
+
+![Fixed setup and the settings you can change](/images/integrations/egauge/10-fixed-setup.png)
+
+The site, meter, register, utility, and interval are fixed, because changing
+them would mix readings from different sources. To change any of them, retire
+the connector and run the guided setup again.
+
+**Updating credentials.** If the meter's password changes, enter the new
+username and password under **Credentials**. They're checked against the same
+meter before they replace the old ones.
+
+![Updating credentials and retiring a connector](/images/integrations/egauge/11-credentials-retire.png)
+
+**Retiring a connector** stops its imports permanently and frees the register.
+The meter and all of its readings are kept. Retiring can't be undone. To
+import the same register again, run the guided setup, which reuses the same
+meter.
+
+## How eGauge Readings Show Up
+
+- **Electricity** meters appear with your site's other meters and count toward
+  energy totals, charts, and exports according to the flow you chose.
+- **Solar** meters are counted as solar generation and are kept separate from
+  the energy your buildings use.
+- **Water** meters are shown in gallons and are never included in electricity
+  totals, kWh charts, or energy exports.
