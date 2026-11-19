@@ -1,0 +1,44 @@
+---
+title: November 2026
+description: Set up a whole eGauge panel in one pass, group circuits by category, see them in the new Equipment Energy Monitor, no more double-counted circuits, and backfills that never pause live readings.
+---
+
+November brings circuit-level energy into Huckleberry: connect a panel's
+circuits in one go, group them the way you think about your equipment, and see
+where a site's energy goes on its Facility Management page.
+
+**Equipment Energy Monitor**  
+Sites with eGauge circuits now have an Equipment Energy Monitor on their
+Facility Management page. See today, yesterday, the last 7 or 30 days, or a
+custom range, in kWh or kW, with one line per category &mdash; Chillers,
+Lighting, Headhouse Climate, whatever you call them. Expand a category to see
+its circuits, spot one that has gone offline, and download the table as CSV.
+[Learn more](/docs/integrations/egauge#equipment-energy-monitor).
+
+**Set Up a Whole Panel at Once**  
+The eGauge setup now lets you tick several registers and set them up together:
+check each circuit's details in one table, preview them all, and activate them
+in one go. If one has a problem, the rest still go ahead and you can retry just
+that one. [Learn more](/docs/integrations/egauge#setting-up-several-circuits-at-once).
+
+**Group Circuits by Category**  
+Give each circuit a category during setup, or change it later in the
+connector's settings. Huckleberry suggests one from the register's name and
+remembers the categories you've used, so a panel's circuits group consistently.
+
+**No More Double-Counted Circuits**  
+A circuit can now be marked as a sub-meter of the site's utility meter, and
+setup pre-selects that meter for you. Site totals count the utility meter once,
+while each circuit is still shown on its own. A panel's own total register is
+recognised too, and kept as a reference rather than added on top of its
+circuits. [Learn more](/docs/integrations/egauge#sub-meters).
+
+**Circuits That Count Backwards, Fixed Automatically**  
+Some eGauge installs record a circuit's usage as a negative number. Huckleberry
+now spots this during setup and flips the sign, so those circuits import
+correctly instead of being skipped.
+
+**Longer Backfills Without the Wait**  
+Extending how far back a connector imports no longer pauses its live readings.
+New data keeps arriving while the older history fills in over the next few
+runs.
