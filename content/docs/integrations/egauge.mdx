@@ -1,20 +1,22 @@
 ---
 title: eGauge Meters
-description: Connect an eGauge energy or water meter and bring its interval readings into Huckleberry, with history backfilled automatically.
+description: Connect the circuits on an eGauge meter, group them by category, and see them in your site's Equipment Energy Monitor, with history backfilled automatically.
 ---
 
 Huckleberry can read interval data straight from an **eGauge** meter. Connect
-one register (one measured circuit or feed) and Huckleberry imports its history,
-then keeps polling for new readings. Electricity comes in as kWh per interval
-plus average kW. Water comes in by volume and is shown in gallons.
+the registers you care about (each measured circuit or feed) and Huckleberry
+imports their history, then keeps polling for new readings. Electricity comes in
+as kWh per interval plus average kW. Water comes in by volume and is shown in
+gallons.
 
-A guided setup walks you through the connection in seven short steps and shows
-you a sample of real readings before anything is saved.
+A guided setup walks you through the connection and shows you a sample of real
+readings before anything is saved. You can set up one register at a time, or
+tick several and set up a whole panel's circuits together.
 
 <Callout type="info">
-**One register becomes one meter.** If an eGauge measures several circuits,
-for example the grid feed and a solar array, set up each register you want
-as its own connector.
+**Each register becomes its own meter.** When you set up several registers at
+once, each still gets its own meter and its own connector, so you can rename,
+pause, or retire any one of them later without touching the others.
 </Callout>
 
 ## Before You Start
@@ -26,7 +28,9 @@ You'll need:
   address. Addresses that only work inside your building's network can't be
   reached by Huckleberry.
 - **A username and password** for the meter. A read-only account is enough.
-- **The site the meter serves**, already set up in Huckleberry.
+- **The site the meter serves**, already set up in Huckleberry. If the site has
+  a utility meter in Huckleberry, your circuits can be set up as its
+  sub-meters (see [Sub-meters](#sub-meters)).
 
 ## Setting Up a Connector
 
@@ -37,7 +41,7 @@ Go to **Admin &rarr; Data Connectors**, choose **+ New connector**, select
 
 ### 1. Site
 
-Pick the site the meter serves. Its readings are stored on a meter at this
+Pick the site the meter serves. Its readings are stored on meters at this
 site.
 
 ![Choosing the site](/images/integrations/egauge/02-site.png)
@@ -59,14 +63,25 @@ If the test fails, the message tells you why. Common causes:
 
 ### 3. Register
 
-Huckleberry lists every register on the meter. Pick the one to import.
+Huckleberry lists every register on the meter. Tick the ones to import. Tick
+one register to set it up on its own, or several to set up a panel's circuits
+together (see [Setting Up Several Circuits at Once](#setting-up-several-circuits-at-once)).
 
-![Picking a register](/images/integrations/egauge/04-register.png)
+![Ticking registers to import](/images/integrations/egauge/04-register.png)
 
-Huckleberry decides what a register measures from its type on the meter, not
-from its name, so a register labelled "Water" that actually measures power is
-still treated as electricity. A register that's already imported by another
-connector is marked **Already connected**, with a link to that connector.
+- Huckleberry decides what a register measures from its type on the meter, not
+  from its name, so a register labelled "Water" that actually measures power is
+  still treated as electricity.
+- A register that's already imported by another connector is marked **Already
+  connected**, with a link to that connector.
+- A register that looks like the **panel's own total** (the meter's "use"
+  register, or one named Main, Mains, Grid, Service, Total, or Usage) is marked
+  as such. Leave it out when you're setting up the panel's circuits. If you do
+  set it up, it's labelled **Panel total**, shown for reference, and never
+  added to the circuits' totals, so nothing is counted twice.
+
+The steps below describe setting up **one** register. With several ticked,
+**Next** takes you to a single batch step instead.
 
 ### 4. Units
 
@@ -103,10 +118,21 @@ The solar question appears only for electricity.
 
 Create a new meter at the site, or attach the register to an existing meter.
 Only meters that match the utility, flow, and solar choice, and that don't
-already receive readings from somewhere else, are offered. Give the meter and
-the connector a name.
+already receive readings from somewhere else, are offered.
 
-![Naming the meter and connector](/images/integrations/egauge/07-meter.png)
+![Naming the meter, choosing its parent and category](/images/integrations/egauge/07-meter.png)
+
+- **Sub-meter of.** Choose the meter this circuit sits behind, usually the
+  site's utility meter. Huckleberry pre-selects it when it can tell which one
+  it is. A sub-meter's usage is already inside its parent, so site totals leave
+  it out. Choose **Not a sub-meter** only if the circuit isn't behind any meter
+  you have in Huckleberry. See [Sub-meters](#sub-meters).
+- **Category.** The group this circuit belongs to in the site's
+  [Equipment Energy Monitor](#equipment-energy-monitor), such as Chillers,
+  Lighting, or Headhouse Climate. Huckleberry suggests one from the register's
+  name; type your own or pick one you've used before. Leave it blank and the
+  circuit shows under **Other**.
+- Give the meter and the connector a name.
 
 ### 7. Preview and Activate
 
@@ -119,8 +145,77 @@ meter reports in, how each value was calculated, and any gaps.
 
 ![The preview, with checks and sample readings](/images/integrations/egauge/08-preview.png)
 
+<Callout type="info">
+**Registers that count backwards are fixed for you.** Some eGauge installs
+record a circuit's usage as a negative number. Huckleberry spots this from the
+sample and flips the sign, so the circuit's readings come in as positive
+usage. The preview shows **Sign** when it has done this, and so does the
+connector's settings page afterwards.
+</Callout>
+
 When every check passes, choose **Activate**. Huckleberry starts importing the
 history right away, and then polls for new readings on the interval you picked.
+
+## Setting Up Several Circuits at Once
+
+Tick two or more registers on the **Register** step and choose **Next**. One
+batch step replaces the rest of the guided setup.
+
+![Setting up three circuits from one panel together](/images/integrations/egauge/12-batch.png)
+
+1. **Sub-meter of** applies to every electricity circuit that measures
+   consumption. Huckleberry pre-selects the site's utility meter when it can.
+   Generation, net, and water registers always stay standalone.
+2. **Check each row.** Each register has its own solar and flow choice, a meter
+   name, and a **category**, all pre-filled from the register. Water registers
+   need you to confirm they measure water.
+3. **Preview all** checks every row and reads a sample, one register at a time.
+   Each row shows a tick and its last 24 hours of usage, or what went wrong.
+4. **Activate all** activates the rows one at a time. If one fails, the others
+   still go ahead; fix the problem and choose **Retry** on that row, or
+   **Remove from batch** to leave it out.
+
+When every row is activated, choose **Done**. Each circuit now has its own
+connector under **Data Connectors**.
+
+## Sub-meters
+
+A circuit measured by an eGauge is usually already counted by the site's
+utility meter. If both were added up, the same energy would be counted twice.
+Marking the circuit as a **sub-meter** of the utility meter prevents that:
+
+- **Site totals**, including **All Meters (total)** on the Facility Management
+  page, count only the main meter.
+- The circuit is still **shown on its own**, listed under its parent in the
+  meter dropdown, so you can look at it individually.
+
+You can set or change a circuit's parent at any time on its connector's
+settings page.
+
+## Equipment Energy Monitor
+
+Sites with eGauge circuits get an **Equipment Energy Monitor** on their
+**Facility Management** page. It shows where the site's energy goes, grouped by
+the categories you gave your circuits.
+
+![The Equipment Energy Monitor on a site's Facility Management page](/images/integrations/egauge/13-energy-monitor.png)
+
+- **Periods:** Today, Yesterday, Last 7 Days, Last 30 Days, or a custom range of
+  up to 400 days.
+- **kWh or kW:** energy per interval, or average demand.
+- **Category chips:** click a category to hide or show it in the chart and the
+  table.
+- **The chart** draws one line per category. A **Panel total** is drawn as a
+  dashed reference line, so you can see how much of the panel your circuits
+  account for.
+- **Summary by Category** lists each category's usage for today, yesterday, the
+  last 7 days, and the last 30 days. Click a row to see its circuits. A circuit
+  that has stopped reporting shows **N/A** and is marked **offline**.
+- **Download CSV** exports the table, one line per circuit plus a subtotal per
+  category.
+
+Times are shown in the site's own time zone. The monitor covers the whole site,
+even when you're looking at one building.
 
 ## Watching the Import
 
@@ -145,10 +240,18 @@ for a while.
 ## Changing a Connector
 
 Some settings can be changed at any time: the connector's name, the flow, the
-solar choice, and how many days of history to backfill. A longer backfill
-reads further back; a shorter one just stops reading older history.
+solar choice, the **sub-meter** parent, the **category**, and how many days of
+history to backfill.
 
 ![Fixed setup and the settings you can change](/images/integrations/egauge/10-fixed-setup.png)
+
+- **A longer backfill** reads further back. New readings keep arriving while
+  the older history fills in over the next few runs, so your current data never
+  pauses.
+- **A shorter backfill** stops reading older history. If older history was
+  still being filled in, Huckleberry stops at the new start.
+- **Category and sub-meter** changes apply straight away to the Equipment
+  Energy Monitor and to site totals.
 
 The site, meter, register, utility, and interval are fixed, because changing
 them would mix readings from different sources. To change any of them, retire
@@ -168,7 +271,11 @@ meter.
 ## How eGauge Readings Show Up
 
 - **Electricity** meters appear with your site's other meters and count toward
-  energy totals, charts, and exports according to the flow you chose.
+  energy totals, charts, and exports according to the flow you chose. A
+  **sub-meter** is shown on its own but left out of site totals, because its
+  parent already counts it.
+- **Circuits with a category** are grouped in the site's Equipment Energy
+  Monitor. A **Panel total** is shown there for reference and never added up.
 - **Solar** meters are counted as solar generation and are kept separate from
   the energy your buildings use.
 - **Water** meters are shown in gallons and are never included in electricity
