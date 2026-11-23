@@ -7,8 +7,10 @@ const withMDX = createMDX();
 const movedPages = [
   ['/docs/power-purchasing', '/docs/dashboards/power-purchasing'],
   ['/docs/dashboards', '/docs/dashboards/performance'],
-  ['/docs/controls', '/docs/dashboards/facility-controls'],
-  ['/docs/controls/equipment-graphics', '/docs/dashboards/facility-controls/equipment-graphics'],
+  ['/docs/controls', '/docs/dashboards/facility-management'],
+  ['/docs/controls/equipment-graphics', '/docs/dashboards/facility-management/equipment-graphics'],
+  ['/docs/dashboards/facility-controls', '/docs/dashboards/facility-management'],
+  ['/docs/dashboards/facility-controls/equipment-graphics', '/docs/dashboards/facility-management/equipment-graphics'],
   ['/docs/utility-billing', '/docs/analytics/utility-data'],
   ['/docs/utility-billing/:page', '/docs/analytics/utility-data/:page'],
   ['/docs/analytics', '/docs/analytics/measurement-verification'],
