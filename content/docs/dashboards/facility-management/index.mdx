@@ -12,3 +12,130 @@ your connected building systems.
 - Alarm events table with severity, status, breach direction, filtering, and search.
 - Site detail pages with images, coordinates and address.
 - Each piece of equipment can open its own controls graphic from your building system, inside Huckleberry (see [Equipment Graphics](/docs/dashboards/facility-management/equipment-graphics)).
+
+## Your portfolio at a glance
+
+The top of the page sums up every site, then lists them one by one.
+
+![Facility Management overview: headline figures and the list of sites and buildings](/images/facility-management/01-overview.png)
+
+- **Headline figures** &mdash; active alarms, open faults with their
+  estimated cost so far, how much equipment is online, current demand,
+  energy used today and when the latest reading arrived.
+- **Sites** &mdash; each site with its photo and address. Sites with
+  connected buildings show, per building, how much equipment is online,
+  demand right now, energy today compared with yesterday, energy per square
+  foot and any open faults. The sparkline shows energy use over the last
+  seven days.
+- **View Options** &mdash; switch between the list and a grid of site cards.
+
+Select a site or building name to open its [detail page](#a-site).
+
+## Meters
+
+Every connected meter, its latest demand, today's energy (or water) and
+when it last reported.
+
+![The Meters table: latest demand, today's energy and status for each meter](/images/facility-management/02-meters.png)
+
+A meter is **Reporting** when its readings are up to date and **Stale**
+when they've stopped arriving. Sub-meters that sit under a parent meter are
+marked **excluded · in parent meter**, so their energy isn't counted twice.
+
+## Needs attention and faults
+
+![Needs attention, and faults across the portfolio with their impact so far](/images/facility-management/03-attention-faults.png)
+
+- **Needs attention** &mdash; equipment with an open fault, with when it
+  last sent data.
+- **Faults across portfolio** &mdash; open faults by site: how many, their
+  estimated cost so far, the most common fault types and what's already
+  being handled, such as a repair being verified or a fault clearing. Filter
+  by severity with **High**, **Medium** and **Low**.
+
+Cost estimates are a range. Where a unit's size (tonnage) isn't recorded,
+Huckleberry assumes a typical size and says so. Add the tonnage to the
+equipment record to narrow the range.
+
+## Fault detection coverage
+
+How much of your equipment fault detection is actually watching, and how
+good the data feeding it is.
+
+![FDD coverage: share of equipment watched, data quality score, detectors and sites](/images/facility-management/04-fdd-coverage.png)
+
+- **Watched by fault detection** &mdash; the share of your equipment,
+  weighted by size, that has fault detection running on it.
+- **Data quality score** &mdash; how complete and current the readings
+  behind fault detection have been over the last 30 days.
+- **Not watched** &mdash; why some units aren't covered, for example
+  equipment that isn't linked to a building controller yet.
+- **By detector** and **By site** &mdash; where coverage is strong and
+  where it's thin, least-watched sites first.
+
+A **Units needing attention first** list below names the specific units to
+fix.
+
+## Alarms
+
+Building-system alarms, newest first.
+
+![The Alarms table with point, equipment, type, severity, value against threshold and status](/images/facility-management/05-alarms.png)
+
+Each alarm shows the point and equipment it came from, whether it went over
+a high limit or under a low one, its severity, the reading against the
+threshold, and its status: **active**, **acknowledged** or **resolved**.
+Filter by date range and status, search by point or equipment, and print,
+copy or export the table.
+
+## A site
+
+A site's page brings together its energy use, floor plans, faults and
+alarms. Choose **All buildings** or a single building.
+
+![A site page: the filters for performance period and meters](/images/facility-management/06-site-filters.png)
+
+Use **Filters** to pick the performance period and the meters to include,
+or tick **Use latest available 30 days**. **Export to Excel** downloads the
+data behind the page.
+
+### Heat map and electric meters
+
+![The site heat map with demand statistics, and the electric meter chart compared with an earlier week](/images/facility-management/07-heat-map-meters.png)
+
+- **Heat Map** &mdash; demand for every hour of every day in the period,
+  from green (low) to red (high). Blue cells mean the site was exporting
+  power, for example from solar. Filter by day of the week. Below the map:
+  energy used, peak, average and lowest demand, load factor, the share used
+  outside business hours, weekday against weekend demand and when the site
+  usually peaks.
+- **Electric Meters** &mdash; demand over the period. Tick **Add
+  Comparison** to overlay an earlier period and shade the savings between
+  them, with the difference charted below and a **Comparison Summary** of
+  energy, average and peak demand.
+
+### Floor plans
+
+![A floor plan with live sensor readings in each room](/images/facility-management/08-floor-plan.png)
+
+Pick a building and floor to see equipment and sensors where they sit, with
+their live readings. Pins are coloured by status: live, fault, down, alarm,
+stale, overridden, disabled or no data. Select a pin or an equipment symbol
+for details. Zoom with Ctrl and scroll (or pinch), drag to pan, and use
+**Full screen** for a closer look.
+
+### Faults
+
+![A site's open faults with severity, impact so far and status](/images/facility-management/09-site-faults.png)
+
+The site's faults, with severity, estimated cost so far, status and how long
+each has been open. Select a fault to see what it means and where it stands.
+
+![A fault's detail: what it means, its repair progress and its impact so far](/images/facility-management/10-fault-detail.png)
+
+The detail explains the fault in plain language, including the usual causes.
+It also shows progress: once a repair is recorded, the fault closes on its
+own after enough clean checks, and starts over if the problem comes back.
+
+The site page also has its own **FDD coverage**, a utility drift check
+against weather-normalized usage, and the site's **Alarms**.
