@@ -1,4 +1,1 @@
-{
-  "title": "Analytics & M&V",
-  "pages": ["index", "option-c"]
-}
+{ "title": "Analytics", "pages": ["utility-data", "measurement-verification", "comparison"] }
