@@ -1,0 +1,237 @@
+---
+title: Power Purchasing
+description: See what each site should pay for electricity under its tariff, check it against your bills, test changes, manage supply contracts and build next year's budget.
+---
+
+Power Purchasing shows what each site pays for electricity, why it pays that,
+and where buying or using power differently would save money. Huckleberry
+models each utility account's cost from its tariff and the site's hourly load,
+then checks that model against what you were actually billed. When the two
+agree, you can trust the model to answer &ldquo;what if&rdquo; questions,
+compare supply offers and forecast next year's spend.
+
+Open **Power Purchasing** from the **Dashboards** menu. If you don't see it,
+it isn't turned on for your account yet. Email
+[info@huckleberryservices.com](mailto:info@huckleberryservices.com) and we'll
+set it up.
+
+<Callout type="info">
+**Two inputs drive every number:** the tariff on each utility account and the
+site's load shape. Confirm both on the **Rate &amp; load** tab first. The
+What-if, supply and budget figures for a site are only as good as those two
+inputs.
+</Callout>
+
+## Quick start
+
+1. **Scan the portfolio** &mdash; the KPI strip and site table show where your
+   electricity spend sits and which sites have weak data.
+2. **Open a site** &mdash; check that every account has a matched rate.
+3. **Confirm the rate and load** &mdash; on **Rate &amp; load**, pick the right
+   tariff and the meter (or building type) that represents the site, then check
+   that billed and modelled costs line up.
+4. **Explore** &mdash; test operating changes on **What-if**, and compare
+   supply offers on **Supply &amp; RTP**.
+5. **Plan** &mdash; create next year's budget, approve it, and let Huckleberry
+   track bills against it.
+
+## The portfolio
+
+The landing page summarises every site you have access to.
+
+- **KPI strip** &mdash; effective rate (all-in $/kWh), load factor, peak
+  demand, and the share of cost that comes from demand charges. Each figure is
+  labelled with its source, such as *Billed* or *Modelled from tariff*.
+- **Contract renewals** &mdash; supply contracts coming up for renewal and the
+  date you need to act by.
+- **Site table** &mdash; one row per site. **Data trust** and **Evidence** show
+  how much of the site's model is measured (an interval meter, a confirmed
+  tariff) and how much is estimated. Select a site to open it.
+
+The buttons at the top right open [Price data](#price-data), the
+[Contract calendar](#contract-calendar) and [Budget](#budget).
+
+## A site
+
+The site page repeats the portfolio KPIs for that site and lists its utility
+accounts, each with its tariff and a rate status:
+
+| Rate status | Meaning |
+| --- | --- |
+| **Matched rate** | The tariff is set and its modelled cost lines up with the bills. |
+| **Estimated rate** | Huckleberry's best guess. Confirm it on the Rate &amp; load tab. |
+| **Needs a rate** | No tariff chosen yet, so the account can't be modelled. |
+| **Custom rate** | A negotiated or special rate that can't be modelled from a published tariff. |
+
+**Data trust** explains what lowers confidence in the site's numbers, such as
+no interval meter, an unconfirmed tariff or missing bills, and what to fix
+first. Work through the tabs from left to right: **Rate &amp; load**,
+**What-if**, then **Supply &amp; RTP**.
+
+### Delivery-only accounts
+
+If a site buys its electricity from a competitive supplier, the utility only
+delivers it. Once the supplier account is linked to the utility account on the
+**Supply &amp; RTP** tab, Huckleberry prices the utility account as delivery
+only: the tariff cost minus the utility's default supply, at its
+price-to-compare. The account card notes this, so the billed and modelled
+figures are compared like for like.
+
+A delivery-only account needs the utility's price-to-compare, which you enter
+in the supplier account's **Comparison settings** under **Price-to-compare
+periods**. Until it's set, the account shows *Delivery only: needs the
+utility's price-to-compare*.
+
+## Rate &amp; load
+
+How the site uses power, and what its tariff charges for it.
+
+- **Typical day** &mdash; the site's hourly load shape by season. It comes from
+  an interval meter when one is set as the load source. Otherwise it's a
+  modelled profile for the building type, scaled to match the bills.
+- **Load source** &mdash; pick the meter that measures the whole site, or, for a
+  site that only has bills, choose its building type (office, school, retail,
+  warehouse and so on).
+- **Candidate rates** &mdash; for an account without a confirmed tariff,
+  Huckleberry ranks the utility's tariffs by how well each one reproduces your
+  bills. Pick the right one and select **Confirm this rate**.
+- **Billed vs modelled** &mdash; each bill beside what the tariff model says it
+  should have been. When the two lines agree, the rate and load are right.
+- **Better-fit rate** &mdash; other tariffs the account could move to, and what
+  each would cost on the same load.
+
+<Callout type="warn">
+**&ldquo;The tariff may be wrong&rdquo;** means billed and modelled costs differ
+by more than this rate would explain. Common causes are the wrong tariff, a
+rate change the bills don't reflect yet, or a load source that doesn't
+represent the whole account. Check the candidate rates and the load source
+before relying on the site's other numbers.
+</Callout>
+
+## What-if scenarios
+
+Test operating changes before you commit to them. Every scenario is priced on
+the site's own tariff and hourly load.
+
+- **Shift load** &mdash; move energy from expensive hours into cheaper ones,
+  such as pre-cooling a building in the morning. Set the share of load (or kWh
+  per day) to shift, the hours to shift from and to, and the days and months it
+  applies to.
+- **Cut peak demand** &mdash; cap demand at a set kW, or cut each billing
+  cycle's peak by a percentage. This is the lever for demand charges.
+- **Annual effect** shows the change in cost by charge type, and the load chart
+  shows the shape before and after.
+- **Save** a scenario to compare options side by side or share them with your
+  team.
+
+## Supply &amp; RTP
+
+For accounts that buy electricity from a competitive supplier: the contract,
+how it's performing, and what to do at renewal.
+
+- **Supplier and delivery links** pair the supplier's bill with the utility
+  account that measures the kWh, so supplier cost can be checked against real
+  usage. Linking also switches the utility account to
+  [delivery-only pricing](#delivery-only-accounts).
+- **Contract** &mdash; the price, term, notice period and what's included.
+  **Contract checks** compare each supplier invoice with the contract and track
+  volume against the swing band.
+- **Capacity and transmission tags (PLC and NSPL)** drive a large share of the
+  bill in PJM markets. Update them each June, when the new planning year starts.
+- **Supply comparison** and **Renewal offers** price every offer on this site's
+  own hourly load, so offers are compared like for like. **Comparison settings**
+  hold the default-service details (customer class and price-to-compare
+  periods) and the pass-through charges used for the comparison.
+- **Download the RFP pack** to send your load data to suppliers.
+- **Hedge ledger** tracks fixed-price blocks against the forecast and the
+  approved budget. **Contract replay** re-prices past bills under the contract
+  to show what it saved.
+- **RTP comparison** shows what the site would pay on the utility's real-time
+  price, using an RTP price series from [Price data](#price-data).
+
+## Price data
+
+The hourly market and utility prices used to price index offers, hedges and
+real-time-price comparisons.
+
+- **Add prices** uploads a CSV of hourly prices from your broker or utility.
+  Index series price index-plus-adder offers and hedges; RTP series power the
+  RTP comparison.
+- **Coverage** shows the dates each series spans. Hours outside that range are
+  reported as not fully priced.
+- **Licence** controls whether a series can be shown in the browser and in
+  PDFs, so licensed market data stays within its terms.
+- Select a series to chart it.
+
+## Contract calendar
+
+Every supply contract's key dates for the next 24 months, so no contract rolls
+over onto default rates unnoticed.
+
+- **Act-by** is the date to start the renewal, a set number of days before the
+  contract ends. **Notice** is the supplier's deadline for giving notice.
+- Reminders go out ahead of each act-by date, at the lead times set on the
+  contract (by default 60, 30 and 7 days before, and on the date itself).
+- Select a site to open its **Supply &amp; RTP** tab and compare renewal offers
+  before the act-by date.
+
+## Budget
+
+Build next year's electricity budget from the model, approve it, then track
+actual bills against it month by month.
+
+1. **New budget** &mdash; choose the sites to include. Each month starts from
+   the billed cost for the same month last year, adjusted to normal weather, the
+   rate's structure and the EIA price outlook. The budget shows the expected
+   figure (P50) with a P10&ndash;P90 range: the range expected in 8 years out
+   of 10.
+2. **Review** &mdash; *Budget by month* and *By site* show which months and
+   sites drive the total. Add notes to record your assumptions.
+3. **Approve** &mdash; approving locks the budget in. **Budget vs actual** then
+   follows each month's bills.
+4. **Explain** &mdash; *What made the difference* splits each month's variance
+   into weather, usage, rate and contract, so you can explain it.
+
+Set the threshold for **Variance alerts** on the budget itself.
+
+<Callout type="info">
+Sites need recent electricity bills to be budgeted. A site whose accounts have
+no bills, or no matched rate, is left out rather than budgeted at zero.
+</Callout>
+
+## Alerts
+
+Turn Power Purchasing emails on or off in **Notification settings**, under
+**Power Purchasing**. Both are checked once a day.
+
+- **Budget variance** &mdash; an account's monthly cost is over or under its
+  approved budget by more than the budget's threshold.
+- **Contract renewals** &mdash; a supply contract reaches one of its act-by
+  reminders.
+
+## Troubleshooting
+
+**An account says &ldquo;Needs a rate&rdquo;** &mdash; open the site's
+**Rate &amp; load** tab and confirm one of the candidate rates. If none fits,
+the account may buy supply from a competitive supplier: link the supplier on
+**Supply &amp; RTP** so it's priced as delivery only.
+
+**Billed and modelled don't line up** &mdash; check the tariff first, then the
+load source. A meter that only covers part of the site, or a building type that
+doesn't match how the site is used, will skew every month.
+
+**&ldquo;Load is modelled, not metered&rdquo;** &mdash; the site has no
+interval meter set as its load source, so its hourly shape comes from a
+building profile. The monthly totals still match your bills; the hour-by-hour
+shape is an estimate. Set an interval meter as the load source if you have one.
+
+**&ldquo;Delivery only: needs the utility's price-to-compare&rdquo;** &mdash;
+enter the price-to-compare periods in the supplier account's **Comparison
+settings** on the **Supply &amp; RTP** tab.
+
+**A site is missing from the budget** &mdash; it has no recent electricity
+bills or no matched rate. Fix the rate or the bills, then recompute the budget.
+
+**An offer or RTP comparison says it isn't fully priced** &mdash; the price
+series doesn't cover every hour in the period. Upload the missing hours on
+**Price data**.
